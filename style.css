@@ -120,3 +120,15 @@ button.danger:hover, #deleteAll:hover, #bulkDelete:hover{background:#4a292e}
 .duplicateQuantityControls input{width:84px;min-width:0;flex:none;text-align:center;font:700 20px 'Courier New',monospace;appearance:textfield;-moz-appearance:textfield}
 .duplicateQuantityControls input::-webkit-inner-spin-button,.duplicateQuantityControls input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .duplicateQuantityModal .actions{justify-content:space-between;margin-top:18px}
+
+/* v0.3.0: fixed card-header indicator order, resilient to long names */
+.entry .details{min-width:0;flex:1 1 0}
+.entry .cardHeader{display:flex;align-items:flex-start;gap:6px;min-width:0;width:100%;margin:0 0 4px}
+.entry .cardHeader .cardName{flex:1 1 auto;min-width:0;margin:0;overflow-wrap:anywhere;word-break:normal;line-height:1.25}
+.entry .cardHeader .entryIndicators{display:flex;align-items:center;gap:5px;flex:0 0 auto;margin:0;max-width:55%;min-width:0}
+.entry .headerTags{display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:2px;min-width:0;max-width:100%}
+.entry .headerTags:empty{display:none}
+.entry .headerTags small{display:inline-flex;font-size:17px;line-height:1.2;white-space:nowrap;color:var(--text)}
+.entry .cardHeader .duplicateCount,.entry .cardHeader .favoriteButton{flex:0 0 32px;width:32px;min-width:32px;height:32px;margin:0}
+.entry .cardHeader .favoriteButton{font-size:22px}
+@media(max-width:520px){.entry .cardHeader{gap:4px}.entry .cardHeader .entryIndicators{gap:3px;max-width:62%}.entry .cardHeader .duplicateCount,.entry .cardHeader .favoriteButton{flex-basis:28px;width:28px;min-width:28px;height:30px}.entry .headerTags small{font-size:15px}}
