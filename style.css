@@ -132,3 +132,110 @@ button.danger:hover, #deleteAll:hover, #bulkDelete:hover{background:#4a292e}
 .entry .cardHeader .duplicateCount,.entry .cardHeader .favoriteButton{flex:0 0 32px;width:32px;min-width:32px;height:32px;margin:0}
 .entry .cardHeader .favoriteButton{font-size:22px}
 @media(max-width:520px){.entry .cardHeader{gap:4px}.entry .cardHeader .entryIndicators{gap:3px;max-width:62%}.entry .cardHeader .duplicateCount,.entry .cardHeader .favoriteButton{flex-basis:28px;width:28px;min-width:28px;height:30px}.entry .headerTags small{font-size:15px}}
+
+/* v0.4.0 — in-place detail navigation */
+#heroArea{position:relative;min-height:100px}
+.cardNav{position:absolute;top:8px;z-index:3;width:38px;height:42px;padding:0;border-radius:9px;background:rgba(35,42,50,.78);color:#fff;border:1px solid rgba(255,255,255,.3);font-size:30px;line-height:1;display:grid;place-items:center;touch-action:manipulation}
+.cardNavPrev{left:5px}.cardNavNext{right:5px}.cardNav:disabled{opacity:.25}
+.cardNav:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+/* v0.4.0 — full light theme, including legacy fixed-color surfaces */
+:root[data-theme="light"]{color-scheme:light;--bg:#f3f5f8;--panel:#fff;--edge:#aeb9c6;--text:#17202b;--muted:#4a5969;--accent:#263b57}
+:root[data-theme="light"] body{background:var(--bg);color:var(--text)}
+:root[data-theme="light"] header small,:root[data-theme="light"] .entry .details small{color:#41566d}
+:root[data-theme="light"] .binder,:root[data-theme="light"] .entry,:root[data-theme="light"] .panel{background:#fff;border-color:#b7c3d0}
+:root[data-theme="light"] .menu,:root[data-theme="light"] .modal{background:#fff}
+:root[data-theme="light"] .modal .actions{background:#fff}
+:root[data-theme="light"] .entry .thumb{background:#e7edf3}
+:root[data-theme="light"] .placeholder{color:#5a6c7f}
+:root[data-theme="light"] .bulk{background:#e5ebf2}
+:root[data-theme="light"] .listRow{border-color:#c4ced9}
+:root[data-theme="light"] .tag.active{background:#d9e8f8}
+:root[data-theme="light"] .primary{color:#fff}
+:root[data-theme="light"] .entry .details div{color:var(--muted)}
+:root[data-theme="light"] .viewer{background:#10151b;color:#fff}
+:root[data-theme="light"] .viewer button{background:#2c3642;color:#fff}
+:root[data-theme="light"] .cropbox{background:#dce3eb}
+:root[data-theme="light"] .settingsSection{border-color:#c2ccd6}
+:root[data-theme="light"] .connectionStatus{color:var(--muted)}
+:root[data-theme="light"] .cardNav{background:rgba(32,42,55,.78);color:#fff}
+
+
+/* v0.4.1 — DA-style persistent inline action status beneath the search toolbar */
+#status{min-height:0;margin:4px 0;line-height:1.3;font:12px/1.3 'Courier New',Courier,monospace;color:#b6d4b6;overflow-wrap:anywhere}
+#status:empty{display:none}
+#status.error{color:#ffaaa9}
+
+/* v0.4.1 — accessible confirmation preference, checkbox anchored to left */
+.settingsSection .confirmToggle{display:flex;align-items:center;justify-content:flex-start;gap:12px;padding:7px 0;cursor:pointer;color:var(--text)}
+.settingsSection .confirmToggle input[type=checkbox]{appearance:auto;display:block;flex:0 0 23px;width:23px;height:23px;min-width:23px;margin:0;accent-color:#91b7eb;cursor:pointer}
+.settingsSection .confirmToggle span{flex:1;min-width:0;font-size:13px;line-height:1.4}
+.settingsSection .confirmToggle input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* v0.4.1 — comprehensive contrast corrections for the light palette */
+:root[data-theme="light"]{
+  --bg:#f3f5f8;--panel:#fff;--edge:#a8b6c5;--text:#172431;--muted:#405166;--accent:#263b57;
+  --ca-surface:#fff;--ca-elevated:#edf2f7;--ca-quiet:#46576b;
+}
+:root[data-theme="light"] body,
+:root[data-theme="light"] .modal,
+:root[data-theme="light"] .duplicateQuantityModal{color:var(--text)}
+:root[data-theme="light"] .settingsSection h3{color:#253a51}
+:root[data-theme="light"] .settingsSection label,
+:root[data-theme="light"] .settingLine,
+:root[data-theme="light"] .field,
+:root[data-theme="light"] .help,
+:root[data-theme="light"] .developerLink{color:#394b60}
+:root[data-theme="light"] .developerLink:hover{color:#13283d}
+:root[data-theme="light"] header small,
+:root[data-theme="light"] .copyrightFooter,
+:root[data-theme="light"] .binderCounter,
+:root[data-theme="light"] #offlineInfo.connectionStatus{color:#40546b}
+:root[data-theme="light"] .catalogueDescription,
+:root[data-theme="light"] .entry .details small,
+:root[data-theme="light"] .copyDescription,
+:root[data-theme="light"] .detailMeta,
+:root[data-theme="light"] .subhead{color:#405166}
+:root[data-theme="light"] .copyBadge,
+:root[data-theme="light"] .duplicateCount,
+:root[data-theme="light"] .entry .duplicateCount,
+:root[data-theme="light"] .entry .entryIndicators>.favoriteButton,
+:root[data-theme="light"] .detailHeading>.favoriteButton{background:#edf2f7;color:#23384f;border-color:#a8b6c5}
+:root[data-theme="light"] .favoriteButton{color:#263b57}
+:root[data-theme="light"] .favoriteButton[aria-pressed="true"],
+:root[data-theme="light"] .entry .entryIndicators>.favoriteButton[aria-pressed="true"]{color:#b42338}
+:root[data-theme="light"] .binderNameBadge{background:#e7edf5;color:#203449;border-color:#a8b6c5}
+:root[data-theme="light"] .tag{background:#f5f8fc;color:#1f3348}
+:root[data-theme="light"] .tag.active{background:#d7e8fb;color:#173c67}
+:root[data-theme="light"] .menu{background:#fff;color:#172431}
+:root[data-theme="light"] .menu button{color:#172431}
+:root[data-theme="light"] .menu button:hover{background:#e7edf5}
+:root[data-theme="light"] .bulk{background:#e5ebf2;color:#1c3146}
+:root[data-theme="light"] .listRow{color:#23384f;border-color:#c4ced9}
+:root[data-theme="light"] .duplicateQuantityModal{background:#fff}
+:root[data-theme="light"] .modal .actions{background:#fff}
+:root[data-theme="light"] .modalShade .actions .danger{color:#a21c35;border-color:#b94255}
+:root[data-theme="light"] .dateFields input::placeholder,
+:root[data-theme="light"] input::placeholder,
+:root[data-theme="light"] textarea::placeholder{color:#64758a;opacity:1}
+:root[data-theme="light"] .placeholder{color:#52677c}
+:root[data-theme="light"] .empty{color:#46576b}
+:root[data-theme="light"] #status{color:#23643d}
+:root[data-theme="light"] #status.error{color:#ad1e35}
+:root[data-theme="light"] .viewer .hint{color:#d4e0ef}
+:root[data-theme="light"] .cardNav{color:#fff}
+:root[data-theme="light"] button.primary{background:#263b57;color:#fff}
+:root[data-theme="light"] button:hover{filter:brightness(.96)}
+@media(max-width:520px){
+  .settingsSection .confirmToggle{gap:10px}
+  .settingsSection .confirmToggle input[type=checkbox]{flex-basis:25px;width:25px;height:25px;min-width:25px}
+}
+
+/* v0.4.3: readable tag labels in card detail and inline Settings notifications */
+.settingsStatus{margin:4px 0 9px;font:12px/1.4 'Courier New',Courier,monospace;color:#b6d4b6;overflow-wrap:anywhere}
+.settingsStatus:empty{display:none}.settingsStatus.error{color:#ffaaa9}
+:root[data-theme="light"] .settingsStatus{color:#23643d}
+:root[data-theme="light"] .settingsStatus.error{color:#ad1e35}
+.detailTags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.detailTags:empty{display:none}
+.detailTag{display:inline-flex;align-items:center;max-width:100%;overflow-wrap:anywhere;white-space:normal;padding:5px 9px;border:1px solid var(--border,#48515d);border-radius:7px;font-size:12px;color:var(--text);background:var(--panel,#252a32)}
+:root[data-theme="light"] .detailTag{background:#edf1f6;border-color:#bdc8d3;color:#253a51}
