@@ -102,3 +102,21 @@ button.danger:hover, #deleteAll:hover, #bulkDelete:hover{background:#4a292e}
 .copyDescription{display:block;margin-top:4px}
 .detailMeta{overflow-wrap:anywhere;white-space:normal}
 .entry .details .tags{display:flex;flex-wrap:wrap}
+
+/* v0.2.9: fixed, noninteractive duplicate counter alongside favorite button */
+.entry .entryIndicators{display:flex;align-items:center;flex:0 0 auto;gap:12px;margin-left:auto}
+.entry .duplicateCount{box-sizing:border-box;display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;min-width:36px;border:1px solid var(--edge);border-radius:8px;background:#252c35;color:var(--text);font:700 14px 'Courier New',monospace;cursor:default;user-select:none;pointer-events:none}
+.entry .entryIndicators>.favoriteButton{box-sizing:border-box;flex:0 0 36px;width:36px;height:36px;min-width:36px;margin:0;border:1px solid var(--edge);border-radius:8px;background:#252c35;display:grid;place-items:center;font-size:23px;padding:0}
+.entry .entryIndicators>.favoriteButton[aria-pressed="true"]{color:#f87171}
+.entry .details{flex:1 1 0;min-width:0;overflow-wrap:anywhere}
+.entry .cardName,.entry .catalogueLine,.entry .catalogueDescription{overflow-wrap:anywhere;white-space:normal}
+@media(max-width:520px){.entry .duplicateCount,.entry .entryIndicators>.favoriteButton{flex-basis:34px;width:34px;min-width:34px;height:36px}.entry .entryIndicators{gap:12px}}
+.duplicateQuantityShade{position:fixed;inset:0;z-index:145;background:#000b;display:flex;align-items:center;justify-content:center;padding:12px}
+.duplicateQuantityModal{box-sizing:border-box;background:#20262e;border:1px solid var(--edge);border-radius:14px;padding:18px;width:min(360px,100%);max-height:90dvh;overflow:auto;box-shadow:0 12px 45px #0009}
+.duplicateQuantityModal h2{font:700 20px 'Courier New',monospace;margin:0 0 12px}
+.duplicateQuantityModal p{margin:6px 0 14px}
+.duplicateQuantityControls{display:flex;align-items:center;justify-content:center;gap:12px}
+.duplicateQuantityControls button{width:42px;height:42px;flex:none;font-size:22px}
+.duplicateQuantityControls input{width:84px;min-width:0;flex:none;text-align:center;font:700 20px 'Courier New',monospace;appearance:textfield;-moz-appearance:textfield}
+.duplicateQuantityControls input::-webkit-inner-spin-button,.duplicateQuantityControls input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.duplicateQuantityModal .actions{justify-content:space-between;margin-top:18px}
