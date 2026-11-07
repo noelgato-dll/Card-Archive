@@ -92,3 +92,13 @@ button.danger:hover, #deleteAll:hover, #bulkDelete:hover{background:#4a292e}
 /* v0.2.7 alignment: exact DA typography and spacing for network indicator */
 #offlineInfo.connectionStatus{font-family:'Courier New',Courier,monospace;font-size:.68rem;line-height:1.3;letter-spacing:.09em;color:#a3adba;margin:5px 0;overflow-wrap:anywhere}
 #offlineInfo:empty{display:none}
+
+/* v0.2.8: show only available metadata; keep long text within its own column. */
+.entry .details,.copyRow>span,.detailHeading .detailTitle{min-width:0;overflow-wrap:anywhere;word-break:normal;white-space:normal}
+.entry .details .catalogueLine{white-space:normal;overflow-wrap:anywhere;line-height:1.3}
+.entry .details .catalogueDescription,.descriptionText,.copyDescription{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}
+.entry>.favoriteButton{flex-shrink:0}
+.copyRow>span{flex:1;display:block}
+.copyDescription{display:block;margin-top:4px}
+.detailMeta{overflow-wrap:anywhere;white-space:normal}
+.entry .details .tags{display:flex;flex-wrap:wrap}
