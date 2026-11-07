@@ -34,3 +34,29 @@ body,.subhead,.catalogueMeta,.details,.empty{font-family:'Courier New',Courier,m
 /* v0.2.2: consistent DA-style destructive action styling */
 button.danger, .actions button.danger, #deleteAll, #bulkDelete, [data-del-tag], [data-del-binder], [data-delete], [id^="delete"]{color:#ffaaa9;border-color:#a94c4c;background:#3a2428}
 button.danger:hover, #deleteAll:hover, #bulkDelete:hover{background:#4a292e}
+
+/* v0.2.3: iOS focus zoom prevention without disabling user zoom */
+@media(max-width:768px){input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:16px!important}.modalShade{align-items:safe center}}
+.cardName{display:block}.favoriteButton{display:inline-grid;vertical-align:baseline;width:27px;height:27px;min-width:0;flex:none;font-size:22px;line-height:1;padding:0;margin-left:4px}.detailTitle{overflow-wrap:anywhere}.detailTitle .favoriteButton{font-size:25px}.imageMissing{background:#30343b}.compactView .entry{min-height:70px}.compactView .details div{margin-top:2px}.cropSurface{position:relative;display:table;margin:10px auto;max-width:100%;touch-action:none}.cropSurface canvas{display:block;max-width:100%;max-height:48dvh}.cropSelection{position:absolute;border:2px solid #fff;box-shadow:0 0 0 9999px #0008;touch-action:none;cursor:move}.cropSelection i{position:absolute;width:20px;height:20px;background:#e8eef7;border:2px solid #1a2430;border-radius:3px;touch-action:none}.cropSelection [data-corner=tl]{top:-10px;left:-10px;cursor:nwse-resize}.cropSelection [data-corner=tr]{top:-10px;right:-10px;cursor:nesw-resize}.cropSelection [data-corner=bl]{bottom:-10px;left:-10px;cursor:nesw-resize}.cropSelection [data-corner=br]{bottom:-10px;right:-10px;cursor:nwse-resize}
+
+/* v0.2.3 revised: single-line Courier counts, compact equal-size bulk actions */
+.homeCounts{font-family:'Courier New',Courier,monospace;white-space:nowrap;font-size:clamp(10px,2.8vw,14px);letter-spacing:-.2px}
+.bulk{display:flex;flex-wrap:nowrap;align-items:center;gap:6px;padding:7px;min-width:0}
+.bulk .bulkSelect{width:28px;min-width:28px;flex:0 0 28px;height:36px;padding:0;display:grid;place-items:center;border:0;background:transparent;font-size:21px}
+.bulk .bulkCount{white-space:nowrap;flex:1;min-width:0;font:12px 'Courier New',Courier,monospace}
+.bulk .bulkActions{display:flex;flex:0 0 auto;gap:5px;align-items:center}
+.bulk .bulkIcon{width:36px;height:36px;flex:0 0 36px;min-width:36px;display:grid;place-items:center;padding:0;font-size:19px;line-height:1;border-radius:8px}
+.bulk .bulkIcon.danger{color:#ffaaa9;border-color:#a94c4c;background:#3a2428}
+@media(max-width:390px){.homeCounts{font-size:10px;letter-spacing:-.5px}.bulk{gap:3px;padding:5px}.bulk .bulkActions{gap:3px}.bulk .bulkIcon{width:32px;height:34px;flex-basis:32px;min-width:32px;font-size:17px}.bulk .bulkSelect{width:25px;min-width:25px;flex-basis:25px}.bulk .bulkCount{font-size:11px}}
+
+/* v0.2.3 — DA v0.3.9-style multi-select tag dropdown */
+.tagPickerDropdown{margin:5px 0 0;border:1px solid #48515d;border-radius:8px;background:#242a32;overflow:hidden}
+.tagPickerSummary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:42px;padding:8px 10px;cursor:pointer}
+.tagPickerSummary::-webkit-details-marker{display:none}
+.tagPickerSelected{display:flex;align-items:center;gap:9px;min-width:0;flex-wrap:wrap;font-size:13px}
+.tagPickerIcons{overflow-wrap:anywhere}.tagPickerCount,.tagPickerHint{color:#aab4c0;font-size:12px}
+.tagPickerChevron{color:#aab4c0;transition:transform .15s}.tagPickerDropdown[open] .tagPickerChevron{transform:rotate(180deg)}
+.tagPickerOptions{border-top:1px solid #48515d;max-height:220px;overflow:auto;padding:4px}
+.tagPickerOption{width:100%;min-height:38px;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;border:0;border-radius:5px;background:transparent;padding:7px 9px;margin:0;color:inherit;font:inherit}
+.tagPickerOption:hover,.tagPickerOption:focus-visible{background:#343d49}
+.tagPickerOptionName{min-width:0;overflow-wrap:anywhere;font-size:13px}.tagPickerCheck{flex:0 0 18px;text-align:center;color:#bce7bd;font-weight:bold}
