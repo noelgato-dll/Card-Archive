@@ -104,3 +104,12 @@ render();
 
 // Warn before navigating away from a dirty card/copy editor with browser Back.
 window.addEventListener('popstate',()=>{if($('modalRoot').querySelector('.modal[data-editor]'))safeCloseEditor()});
+
+// v0.2.7 — Match DA connection status: browser online/offline events.
+const offlineInfo = document.getElementById('offlineInfo');
+function updateConnectionLabel(){
+  if(offlineInfo) offlineInfo.textContent = navigator.onLine ? 'NETWORK: ONLINE · CATALOGUE: ON THIS DEVICE' : 'NETWORK: OFFLINE · CATALOGUE: ON THIS DEVICE';
+}
+window.addEventListener('online', updateConnectionLabel);
+window.addEventListener('offline', updateConnectionLabel);
+updateConnectionLabel();
