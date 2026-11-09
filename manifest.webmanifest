@@ -1,1 +1,16 @@
-{"name":"Card Archive","short_name":"Card Archive","start_url":"./","display":"standalone","background_color":"#171b20","theme_color":"#171b20","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "name": "Archive",
+  "short_name": "Archive",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#171b20",
+  "theme_color": "#171b20",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
