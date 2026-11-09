@@ -240,1094 +240,174 @@ button.danger:hover, #deleteAll:hover, #bulkDelete:hover{background:#4a292e}
 .detailTag{display:inline-flex;align-items:center;max-width:100%;overflow-wrap:anywhere;white-space:normal;padding:5px 9px;border:1px solid var(--border,#48515d);border-radius:7px;font-size:12px;color:var(--text);background:var(--panel,#252a32)}
 :root[data-theme="light"] .detailTag{background:#edf1f6;border-color:#bdc8d3;color:#253a51}
 
-/* Archive v0.1.5: shelf type label */
-.shelfTypeLabel{display:block;font-size:.75rem;opacity:.7;margin-top:2px}
+/* v0.4.3: Optional two-column Detailed Grid for binder catalogue only. */
+#content.detailedGridView{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
+#content.detailedGridView .entry{display:flex;flex-direction:column;align-items:stretch;gap:8px;min-width:0;min-height:0;margin:0;padding:10px;position:relative}
+#content.detailedGridView .entry .thumb{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:contain;flex:none;border-radius:7px}
+#content.detailedGridView .entry .thumb.placeholder{display:grid;place-items:center}
+#content.detailedGridView .entry .details{width:100%;min-width:0;flex:1}
+#content.detailedGridView .entry .cardHeader{display:flex;flex-direction:column;align-items:stretch;gap:5px}
+#content.detailedGridView .entry .cardName{text-align:center;font-size:15px;line-height:1.3;margin:0;overflow-wrap:anywhere}
+#content.detailedGridView .entry .entryIndicators{justify-content:center;flex-wrap:wrap;min-width:0}
+#content.detailedGridView .entry .catalogueLine{font-size:12px;line-height:1.35;margin:4px 0;overflow-wrap:anywhere}
+#content.detailedGridView .entry .catalogueDescription{font-size:12px;line-height:1.4;margin-top:7px;overflow-wrap:anywhere}
+#content.detailedGridView .entry input[type=checkbox]{position:absolute;top:15px;left:15px;z-index:1;background:var(--panel)}
+@media(max-width:520px){#content.detailedGridView{gap:8px}#content.detailedGridView .entry{padding:7px;gap:6px}#content.detailedGridView .entry .cardName{font-size:13px}#content.detailedGridView .entry .catalogueLine,#content.detailedGridView .entry .catalogueDescription{font-size:11px}}
 
-/* Archive v0.1.6 — compact, restrained shelf tiles */
-.binder{display:flex;align-items:center;gap:11px;padding:12px;min-height:84px;text-align:left;overflow:hidden;transition:border-color .15s ease,background-color .15s ease}
-.binder .shelfTileIcon{font-size:clamp(28px,3vw,37px);line-height:1;flex:0 0 42px;text-align:center}
-.binder .shelfTileInfo{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0;flex:1}
-.binder .shelfTileName{display:block;max-width:100%;margin:0;padding:2px 6px;border-radius:5px;background:rgba(160,184,214,.11);font:700 15px/1.35 'Courier New',Courier,monospace;overflow-wrap:anywhere}
-.binder .shelfTypeLabel{margin:0;font-size:12px;line-height:1.25;color:var(--muted);opacity:1}
-.binder small{font-size:12px;line-height:1.25}
-.binder:hover,.binder:focus-visible{border-color:var(--muted)}
-.shelfHeaderIcon{display:inline-block;margin-right:7px;line-height:1;vertical-align:baseline}
-:root[data-theme="light"] .binder .shelfTileName{background:rgba(55,88,128,.10)}
-@media(max-width:520px){.binder{padding:9px;gap:7px;min-height:78px}.binder .shelfTileIcon{flex-basis:31px;font-size:27px}.binder .shelfTileName{font-size:13px;padding:2px 4px}.binder .shelfTypeLabel,.binder small{font-size:11px}}
+/* v0.4.5 — restrained grid refinements, image-overlay favorite, and compact visual settings */
+#content.detailedGridView .entry{gap:6px;padding:9px;font-family:'Courier New',Courier,monospace}
+#content.detailedGridView .gridCardPhoto{width:100%;position:relative;min-width:0;line-height:0}
+#content.detailedGridView .gridCardPhoto .thumb{width:100%;height:auto;aspect-ratio:3/4;object-fit:contain;display:block}
+#content.detailedGridView .gridCardPhoto>.favoriteButton{position:absolute;right:7px;bottom:7px;z-index:2;display:grid;place-items:center;box-sizing:border-box;width:32px;height:32px;min-width:32px;min-height:32px;padding:0;margin:0;border:1px solid var(--edge);border-radius:7px;background:rgba(32,38,46,.92);color:var(--text);font:22px/1 'Courier New',Courier,monospace;cursor:pointer}
+#content.detailedGridView .gridCardPhoto>.favoriteButton[aria-pressed="true"]{color:#f87171}
+#content.detailedGridView .gridCardPhoto>.favoriteButton:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#content.detailedGridView .entry .details{display:flex;flex-direction:column;gap:0;font-family:'Courier New',Courier,monospace}
+#content.detailedGridView .entry .cardHeader{margin:0;gap:2px}
+#content.detailedGridView .entry .cardName{font-family:'Courier New',Courier,monospace;font-size:15px;font-weight:700}
+#content.detailedGridView .entry .entryIndicators{max-width:100%;justify-content:center;gap:5px;margin:0}
+#content.detailedGridView .entry .entryIndicators:empty{display:none}
+#content.detailedGridView .entry .gridCardPack{text-align:center;color:var(--muted);font-size:12px;line-height:1.3;overflow-wrap:anywhere;margin:2px 0 4px}
+#content.detailedGridView .entry .gridCardPack:empty{display:none}
+#content.detailedGridView .entry .gridCardMeta{display:flex;flex-direction:column;gap:2px;border-top:1px solid rgba(148,163,184,.18);padding-top:6px}
+#content.detailedGridView .entry .gridCardMeta:empty{display:none}
+#content.detailedGridView .entry .gridCardMeta .catalogueLine{margin:0;text-align:left;font-size:12px}
+#content.detailedGridView .entry .catalogueDescription{margin:6px 0 0;text-align:left;font-size:12px;white-space:pre-wrap}
+:root[data-theme="light"] #content.detailedGridView .gridCardPhoto>.favoriteButton{background:rgba(237,242,247,.94);color:#23384f}
+:root[data-theme="light"] #content.detailedGridView .gridCardPhoto>.favoriteButton[aria-pressed="true"]{color:#b42338}
+.catalogueSettings{font-family:'Courier New',Courier,monospace}
+.catalogueChoices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:7px 0 8px}
+.catalogueChoice{width:100%;height:112px;min-width:0;min-height:0;padding:8px;border:1px solid var(--edge);border-radius:8px;background:rgba(120,137,156,.045);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:border-color .12s,background-color .12s;box-shadow:none}
+.catalogueChoice.selected{border:2px solid var(--accent);background:rgba(151,181,214,.12)}
+.catalogueChoice:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cataloguePreview{display:flex;width:100%;max-width:112px;height:90px;max-height:100%;min-width:0;overflow:hidden;flex-direction:column;justify-content:center;gap:6px;pointer-events:none}
+.cataloguePreview i,.cataloguePreview em{display:flex;min-width:0;min-height:0;overflow:hidden;font-style:normal}
+.cataloguePreview i{align-items:center;gap:6px;width:100%}
+.cataloguePreview i>b{display:block;flex:0 0 17px;height:23px;background:#798a9d;border-radius:3px}
+.cataloguePreview i>em{flex:1;flex-direction:column;gap:4px;justify-content:center}
+.cataloguePreview u{display:block;height:4px;min-height:3px;width:90%;background:#8495a9;border-radius:4px;text-decoration:none}
+.cataloguePreview u:nth-child(2){width:68%;background:#596b7e}
+.cataloguePreview u:nth-child(3){width:78%;background:#596b7e}
+.compactPreview{gap:5px}.compactPreview i>b{flex-basis:12px;height:17px}.compactPreview i>em{gap:3px}.compactPreview u{height:3px}
+.listPreview{gap:7px}.listPreview i{padding:3px;border-radius:4px;background:rgba(125,145,167,.12)}.listPreview i>b{flex-basis:29px;height:36px}
+.gridPreview{flex-direction:row;align-items:center;gap:6px}.gridPreview i{width:min(50%,50px);height:88px;flex-direction:column;gap:4px;align-items:stretch;padding:4px;background:rgba(125,145,167,.12);border-radius:4px}
+.gridPreview i>b{flex:0 0 auto;width:100%;height:54px;max-height:62%;border-radius:2px}
+.gridPreview i>u{flex:0 0 3px;height:3px;min-height:3px;width:100%}.gridPreview i>u:nth-child(3){width:75%}
+.catalogueChoiceDescription{border-top:1px solid rgba(148,163,184,.2);padding-top:8px;display:flex;flex-direction:column;gap:3px;min-height:48px;font:12px/1.4 'Courier New',Courier,monospace;color:var(--muted)}
+.catalogueChoiceDescription strong{color:var(--text);font-weight:700}
+@media(max-width:520px){.catalogueChoices{gap:5px}.catalogueChoice{height:90px;padding:5px}.cataloguePreview{height:74px;gap:4px}.cataloguePreview i{gap:4px}.listPreview i>b{flex-basis:22px;height:29px}.gridPreview{gap:3px}.gridPreview i{height:72px;padding:3px;gap:3px}.gridPreview i>b{height:43px}#content.detailedGridView .entry{padding:7px;gap:5px}#content.detailedGridView .gridCardPhoto>.favoriteButton{right:5px;bottom:5px;width:29px;height:29px;min-width:29px;min-height:29px;font-size:20px}#content.detailedGridView .entry .gridCardMeta .catalogueLine,#content.detailedGridView .entry .catalogueDescription{font-size:11px}}
 
-/* v0.1.6 hotfix: ensure compact tile content stacks, not horizontal siblings */
-.binder .shelfTileInfo{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;flex:1;gap:3px}
-.binder .shelfTileName{white-space:normal;overflow-wrap:anywhere}
-.binder .shelfTileIcon{flex-shrink:0}
+/* v0.4.6: Contextual catalogue controls and compact binder layout */
+#content.binderCompactView .grid{display:flex;flex-direction:column;gap:6px}
+#content.binderCompactView .binder.binderCompact{display:flex;align-items:center;text-align:left;gap:10px;min-height:0;width:100%;padding:10px 12px;box-sizing:border-box}
+#content.binderCompactView .binderCompact .emoji{font-size:22px;line-height:1.2;flex:none;margin:0}
+#content.binderCompactView .binderCompact strong{flex:1;min-width:0;margin:0;font-size:14px;overflow-wrap:anywhere}
+#content.binderCompactView .binderCompactCounts{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex:none;white-space:nowrap}
+#content.binderCompactView .binderCompactCounts small{margin:0;font-size:11px;color:var(--muted)}
+.catalogueChoices.twoChoices{grid-template-columns:repeat(2,minmax(0,1fr))}
+.binderPreview{display:flex;align-items:center;justify-content:center;width:100%;height:90px;gap:8px;pointer-events:none}
+.binderPreview i{display:flex;box-sizing:border-box;min-width:0;border:1px solid #596b7e;border-radius:5px;background:rgba(125,145,167,.12)}
+.binderDefaultPreview i{width:46%;height:66px;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.binderPreview b{display:block;background:#8495a9;border-radius:3px}
+.binderDefaultPreview b{width:20px;height:20px}.binderDefaultPreview u{height:4px;width:70%;background:#8495a9;border-radius:4px}.binderDefaultPreview u:last-child{width:44%}
+.binderListPreview{flex-direction:column;gap:5px}.binderListPreview i{width:96%;height:23px;align-items:center;gap:7px;padding:4px}.binderListPreview b{width:13px;height:13px;flex:none}.binderListPreview u{height:4px;width:46%;background:#8495a9;border-radius:4px}.binderListPreview em{height:4px;width:22%;margin-left:auto;background:#596b7e;border-radius:4px}
+.themeChoice{height:auto;min-height:120px;flex-direction:column;gap:5px;padding:9px}
+.themeChoice strong{font-size:13px}.themeChoice small{font-size:10px;line-height:1.25;color:var(--muted);text-align:center}
+.themeSample{display:flex;flex-direction:column;gap:5px;width:min(100%,120px);height:55px;border:1px solid #687889;border-radius:5px;padding:7px;box-sizing:border-box}
+.themeSample i{width:60%;height:6px;border-radius:3px}.themeSample b{display:block;height:10px;border-radius:3px}.themeSample b:last-child{width:75%}
+.darkSample{background:#171b20}.darkSample i{background:#e8eef7}.darkSample b{background:#323d49}
+.lightSample{background:#f3f5f8}.lightSample i{background:#203449}.lightSample b{background:#d4dee9}
+.dataActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:7px}
+.dataAction{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-width:0;min-height:116px;padding:10px 7px;border:1px solid var(--edge);border-radius:8px;background:rgba(120,137,156,.045);color:var(--text);font-family:'Courier New',Courier,monospace;cursor:pointer}
+.dataAction svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dataAction strong{font-size:12px}.dataAction small{font-size:10px;line-height:1.3;text-align:center;color:var(--muted)}
+.dataAction:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.backupReminder{border-top:1px solid rgba(148,163,184,.2);padding-top:8px;margin:9px 0 2px}
+.backupWarning{display:block;color:#ff858e;font-weight:700;margin:12px 0 0}
+:root[data-theme="light"] .backupWarning{display:block;color:#b42338}
+@media(max-width:520px){.binderPreview{height:74px}.binderDefaultPreview i{height:55px}.themeChoice{min-height:110px}.dataAction{min-height:106px}#content.binderCompactView .binder.binderCompact{padding:9px 8px;gap:7px}#content.binderCompactView .binderCompactCounts{gap:6px}#content.binderCompactView .binderCompactCounts small{font-size:10px}}
 
-/* v0.1.9 — optional Books-only details */
-.bookDetailsFields[hidden]{display:none!important}
-.bookDetailsFields{border-top:1px solid var(--border, #414750);margin-top:12px;padding-top:8px}
-.bookDetailView{margin-top:14px}
-.bookDetailView dl{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin:8px 0 0}
-.bookDetailView dl>div{display:grid;grid-template-columns:minmax(100px,38%) minmax(0,1fr);gap:8px;align-items:start}
-.bookDetailView dt{opacity:.7}
-.bookDetailView dd{margin:0;overflow-wrap:anywhere}
+/* v0.4.6 TAGS settings action: entire row opens the existing tag manager. */
+.manageTagsAction{display:flex;align-items:center;gap:12px;width:100%;min-width:0;margin-top:7px;padding:12px;border:1px solid var(--edge);border-radius:8px;background:rgba(120,137,156,.045);color:var(--text);font-family:'Courier New',Courier,monospace;text-align:left;cursor:pointer}
+.manageTagsAction:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.manageTagsSymbol{font-size:22px;line-height:1;flex-shrink:0}
+.manageTagsCopy{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.manageTagsCopy strong{font-size:12px;line-height:1.25}
+.manageTagsCopy small{font-size:11px;line-height:1.35;color:var(--muted)}
+.manageTagsChevron{width:17px;height:17px;flex-shrink:0;fill:none;stroke:var(--muted);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-/* Hierarchy navigation and book field isolation */
-.cardOnlyFields[hidden],.bookDetailsFields[hidden]{display:none!important}
-header h1{overflow-wrap:anywhere;font-size:clamp(1.1rem,3.8vw,2rem)}
+/* CA v0.4.6: tag counter and local editor validation */
+.manageTagsCount{flex-shrink:0;font:700 12px 'Courier New',Courier,monospace;color:var(--muted);font-variant-numeric:tabular-nums}
+.editorInlineError{margin-right:auto;color:#ff8d99;font:12px/1.35 'Courier New',Courier,monospace;overflow-wrap:anywhere;min-width:0}
+:root[data-theme='light'] .editorInlineError{color:#b3263e}
 
-/* Archive v0.1.9.2 — Settings redesign */
-.settingsChoiceGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.settingsChoiceGrid button{min-width:0;min-height:65px;font-family:'Courier New',monospace}
-.themePreview{position:relative;display:flex;flex-direction:column;gap:5px;align-items:stretch;padding:9px;border:2px solid transparent;border-radius:9px;text-align:center}
-.themePreview.darkPreview{background:#171b20;color:#e8eef7}.themePreview.lightPreview{background:#f2f5f9;color:#26374a}
-.themePreview.isSelected,.layoutPreview.isSelected{border-color:#82b4ee;box-shadow:inset 0 0 0 1px #82b4ee}
-.previewBar{height:7px;border-radius:3px;background:currentColor;opacity:.7}.previewLines{display:flex;gap:5px}.previewLines i{height:15px;border:1px solid currentColor;opacity:.45;flex:1;border-radius:3px}
-.themePreview strong{font-size:12px}.layoutPreview{display:flex;flex-direction:column;gap:5px;justify-content:center;padding:9px;border:2px solid var(--edge);background:var(--panel);border-radius:9px}
-.layoutLines{display:flex;gap:5px;align-items:center}.layoutLines i{height:13px;border:1px solid var(--muted);border-radius:3px;flex:1}.layoutLines i:first-child{flex:0 0 20%}.compactLines i{height:8px}
-.settingsContext{font-size:11px;color:var(--muted);margin:3px 0 8px}.settingsNavRow{width:100%;display:flex;align-items:center;gap:9px;text-align:left;padding:9px 8px;border:1px solid var(--edge);border-radius:8px;background:var(--panel);color:var(--text)}
-.settingsNavIcon{font-size:20px}.settingsNavText{display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}.settingsNavText small,.backupAction small,.settingsToggleRow small,.deleteLine small{font-size:11px;color:var(--muted);line-height:1.3}.settingsCount{font-size:12px;color:var(--muted)}.settingsChevron{font-size:22px;color:var(--muted)}
-.backupAction{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 7px;text-align:center;border:1px solid var(--edge);border-radius:8px;background:var(--panel);color:var(--text)}.backupSymbol{font-size:24px}.backupAction strong{font-size:12px}.backupAction small{font-size:10px}
-.settingsToggleRow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:5px 0}.settingsToggleRow>span{display:flex;flex-direction:column;gap:5px;font-size:13px}.settingsToggleRow .enabledText{color:#55c787}.settingsToggleRow .disabledText{color:#ef7373}
-button.switch{flex:0 0 42px;width:42px;height:24px;min-width:42px;min-height:24px;padding:2px;border:0;border-radius:20px;background:#9a434b;display:flex;align-items:center;justify-content:flex-start}button.switch.on{background:#328b60;justify-content:flex-end}button.switch span{width:20px;height:20px;border-radius:50%;background:white;display:block}
-.deleteLine>span{display:flex;flex-direction:column;gap:7px;min-width:0}.deleteWarning,.deleteLine .deleteWarning{color:#ff8e8e;font-size:11px;display:block}.deleteLine .icon{flex:0 0 36px;width:36px;height:36px}
-.settingsSection .help{margin:7px 0 2px;line-height:1.35}
-:root[data-theme="light"] .layoutPreview,:root[data-theme="light"] .settingsNavRow,:root[data-theme="light"] .backupAction{background:#f2f5f9;color:#23384f}
-@media(max-width:380px){.settingsChoiceGrid{gap:5px}.settingsSection{padding:7px}.backupAction{padding:8px 4px}}
+/* CA v0.4.6: compact confirmation toggle and understated Delete All warning. */
+.settingsSection .modernConfirmToggle{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;padding:8px 0 5px;color:var(--text)}
+.modernConfirmToggle .confirmToggleHeading{display:flex;align-items:center;gap:9px;flex:1;min-width:0;font:700 12px/1.4 'Courier New',Courier,monospace}
+.modernConfirmToggle .confirmToggleIcon{display:grid;place-items:center;flex:none;width:22px;height:22px;border:1px solid var(--edge);border-radius:6px;font-size:14px}
+.settingsSection .modernConfirmToggle input[type=checkbox]{position:absolute;width:1px;height:1px;min-width:0;opacity:0;margin:0;padding:0;pointer-events:none}
+.modernConfirmToggle .confirmSwitch{position:relative;display:block;flex:0 0 42px;width:42px;height:24px;border-radius:99px;background:#66717d;border:1px solid var(--edge);transition:background .15s}
+.modernConfirmToggle .confirmSwitch:before{content:'';position:absolute;left:2px;top:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .15s}
+.modernConfirmToggle input:checked + .confirmSwitch{background:#3978c6;border-color:#3978c6}
+.modernConfirmToggle input:checked + .confirmSwitch:before{transform:translateX(18px)}
+.modernConfirmToggle input:focus-visible + .confirmSwitch{outline:2px solid var(--accent);outline-offset:3px}
+.deleteAllLine{display:flex;align-items:center;gap:12px;padding:5px 0 2px}
+.deleteAllCopy{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px;font:12px/1.45 'Courier New',Courier,monospace}
+.deleteAllCopy small{font:11px/1.45 'Courier New',Courier,monospace;color:#ff858e}
+:root[data-theme='light'] .deleteAllCopy small{color:#b42338}
+.deleteAllLine #deleteAll{flex-shrink:0}
 
-/* Consistent header spacing at every navigation level */
-header h1{min-height:1.3em;line-height:1.3;margin:8px 0 13px}
+/* v0.4.6: compact confirmation switch and reactive status */
+.settingsSection .modernConfirmToggle{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.settingsSection .modernConfirmToggle .confirmToggleHeading{display:flex;align-items:center;flex:1 1 auto;min-width:0;gap:8px;flex-wrap:wrap}
+.settingsSection .modernConfirmToggle .confirmToggleHeading > span{flex:0 1 auto;min-width:0}
+.settingsSection .modernConfirmToggle .confirmStatus{font:700 11px/1.3 'Courier New',Courier,monospace;white-space:nowrap}
+.settingsSection .modernConfirmToggle .confirmStatus.isEnabled{color:#52c783}
+.settingsSection .modernConfirmToggle .confirmStatus.isDisabled{color:#f16d75}
+.settingsSection .modernConfirmToggle .confirmSwitch{flex:0 0 42px!important;width:42px!important;min-width:42px!important;max-width:42px!important;height:24px!important;min-height:24px;box-sizing:border-box}
+.settingsSection .modernConfirmToggle input[type=checkbox]{position:absolute!important;appearance:none!important;display:block!important;width:1px!important;height:1px!important;min-width:0!important;opacity:0!important;pointer-events:none!important}
 
-/* v0.1.9.3: independent collection, group and item catalogue modes */
-.compactListing .grid{grid-template-columns:1fr;gap:5px}
-.compactListing .binder{min-height:49px;padding:7px 10px;gap:9px}
-.compactListing .binder .shelfTileIcon{font-size:21px;flex-basis:26px}
-.compactListing .binder .shelfTileInfo{flex-direction:row;align-items:center;flex-wrap:wrap;gap:4px 10px}
-.compactListing .binder .shelfTileName{font-size:13px;background:transparent;padding:0}
-.compactListing .binder .shelfTypeLabel{font-size:11px}
-.compactListing .binder small{font-size:11px;margin-left:auto}
-.catalogueChoices{grid-template-columns:repeat(3,minmax(0,1fr))}
-.catalogueOption{min-height:64px;align-items:stretch}
-.layoutSample{display:flex;flex-direction:column;gap:4px;width:100%;height:40px;justify-content:center}
-.layoutSample i{display:block;height:8px;border-radius:3px;border:1px solid var(--edge);background:var(--bg)}
-.layoutSample.default{display:grid;grid-template-columns:repeat(2,1fr);gap:5px}.layoutSample.default i{height:30px}.layoutSample.default i:last-child{display:none}
-.layoutSample.compact i{height:5px}.layoutSample.detailed i{height:13px}.layoutSample.detailed i:last-child{display:none}
-.layoutSample.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:5px}.layoutSample.grid i{height:33px}.layoutSample.grid i:last-child{display:none}
-.detailedGridView{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
-.detailedGridView .entry{display:flex;flex-direction:column;align-items:stretch;min-width:0;margin:0;padding:10px;gap:7px}
-.detailedGridView .entry .thumb{width:100%;height:clamp(125px,23vw,230px);object-fit:contain}
-.detailedGridView .entry .details{width:100%;text-align:center}
-.detailedGridView .entry .cardHeader{flex-direction:column;align-items:center;gap:5px}
-.detailedGridView .entry .cardName{font-size:16px}
-@media(max-width:420px){.detailedGridView{gap:6px}.detailedGridView .entry{padding:6px}.detailedGridView .entry .thumb{height:135px}.detailedGridView .entry .cardName{font-size:13px}.compactListing .binder small{margin-left:0}}
-
-/* v0.1.9.5: progressive collectible detail controls */
-.additionalToggle{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 10px;margin:6px 0 12px;background:transparent;border:1px solid var(--border,#44505d);border-radius:8px;color:inherit;text-align:left;font:inherit;cursor:pointer}.additionalToggle span{font-size:19px}.bookBasicFields[hidden],#bookDetailsFields[hidden],#genericAdditional[hidden],#additionalBookFields[hidden],#genericAdditionalFields[hidden],#genericNameField[hidden]{display:none!important}
-
-/* v0.1.9.6: CA-style context-specific catalogue previews and item binder layout */
-.catalogueChoices:has(.layoutSample.binder){display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
-.catalogueChoices:not(:has(.layoutSample.binder)){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.catalogueChoices .catalogueOption{min-width:0;min-height:66px;padding:8px 5px;overflow:hidden}
-.layoutSample.binder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,1fr);gap:3px;height:44px}
-.layoutSample.binder i{height:auto;min-width:0;border-radius:2px;background:var(--bg);border:1px solid var(--edge)}
-#content.itemBinderView{display:grid;grid-template-columns:repeat(var(--item-binder-columns,3),minmax(0,1fr));gap:9px;align-items:start}
-#content.itemBinderView .entry{display:flex;flex-direction:column;min-width:0;gap:5px;padding:7px;margin:0;overflow:hidden}
-#content.itemBinderView .entry .thumb{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:contain;flex:none}
-#content.itemBinderView .entry .details{min-width:0;width:100%;text-align:center}
-#content.itemBinderView .entry .cardHeader{display:flex;flex-direction:column;gap:3px;align-items:center}
-#content.itemBinderView .entry .cardName{font-size:12px;overflow-wrap:anywhere}
-#content.itemBinderView .entry .catalogueLine,#content.itemBinderView .entry .catalogueDescription{display:none}
-#content.itemBinderView .entryIndicators{justify-content:center;flex-wrap:wrap}
-@media(max-width:480px){#content.itemBinderView{gap:5px}#content.itemBinderView .entry{padding:5px}.catalogueChoices .catalogueOption{padding:6px 3px}}
-
-/* v0.1.9.7: Group Page tiles mirror Card Archive's Home Page only. */
-#content.groupPageTiles:not(.groupCompactTiles) .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px}
-#content.groupPageTiles .groupTile{min-width:0;font-family:'Courier New',Courier,monospace}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTile{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;min-height:132px;padding:13px 11px}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileEmoji{display:block;font-size:34px;line-height:1.1}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileName{display:block;font-size:15px;line-height:1.35;margin:0;overflow-wrap:anywhere}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileCounts{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;margin-top:auto}
-#content.groupPageTiles .groupTileCounts small{color:var(--muted);font:11px/1.3 'Courier New',Courier,monospace;white-space:nowrap}
-#content.groupCompactTiles .grid{display:flex;flex-direction:column;gap:6px}
-#content.groupCompactTiles .groupTile{display:flex;flex-direction:row;align-items:center;gap:10px;min-height:0;width:100%;padding:10px 12px;text-align:left}
-#content.groupCompactTiles .groupTileEmoji{font-size:22px;line-height:1.2;flex:none}
-#content.groupCompactTiles .groupTileName{flex:1;min-width:0;margin:0;font-size:14px;overflow-wrap:anywhere}
-#content.groupCompactTiles .groupTileCounts{display:flex;align-items:center;gap:9px;flex:none;margin-left:auto}
-@media(max-width:520px){#content.groupPageTiles:not(.groupCompactTiles) .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}#content.groupPageTiles:not(.groupCompactTiles) .groupTile{min-height:120px;padding:10px 8px}#content.groupCompactTiles .groupTile{gap:7px;padding:9px 8px}#content.groupCompactTiles .groupTileCounts{gap:5px}#content.groupCompactTiles .groupTileCounts small{font-size:10px}}
-
-/* v0.1.9.8: item-page-only binder column control; no shared tile rules changed. */
-#layoutDescription:has(.binderColumnStepper){display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-#layoutDescription .binderColumnStepper{display:inline-flex;gap:4px;align-items:center;flex-shrink:0}
-#layoutDescription .binderColumnStepper button,#layoutDescription .binderColumnStepper output{box-sizing:border-box;display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--edge);border-radius:7px;background:var(--panel);color:var(--text);font:700 20px/1 'Courier New',Courier,monospace;padding:0}
-#layoutDescription .binderColumnStepper button{cursor:pointer}
-#layoutDescription .binderColumnStepper button:disabled{opacity:.4;cursor:default}
-
-/* v0.2.0 CA v0.4.8 catalogue layout migration; scoped to item catalogue */
-#content .entry .thumb {width:72px;height:98px;object-fit:contain;border-radius:5px;background:#2b323b;flex:none}
-#content .entry .details {min-width:0;flex:1}
-#content .entry .details div {color:var(--muted);margin:5px 0;overflow-wrap:anywhere}
-#content .entry .details small {color:#9ba7b6}
-#content .entry .details div {margin:3px 0}
-#content .cardName {display:block;line-height:1.25}
-#content .favoriteButton {flex:0 0 34px;width:34px;height:36px;font-size:24px;border:0;background:transparent;color:#dce7f6}
-#content .descriptionText, #content .catalogueDescription {white-space:pre-wrap;overflow-wrap:anywhere}
-#content .catalogueDescription {font-size:12px;color:#aeb8c5;line-height:1.3;margin:4px 0}
-#content .cardName {display:block}
-#content .favoriteButton {display:inline-grid;vertical-align:baseline;width:27px;height:27px;min-width:0;flex:none;font-size:22px;line-height:1;padding:0;margin-left:4px}
-#content .detailTitle .favoriteButton {font-size:25px}
-#content /* v0.2.4 — consistent card rows, #content right-aligned icon-only favorite */
-.entry>.favoriteButton {flex:0 0 36px;width:36px;height:36px;min-width:36px;margin:0;align-self:center;border:1px solid var(--edge);background:#252c35;border-radius:8px;display:grid;place-items:center;font-size:23px;padding:0}
-#content .entry>.favoriteButton[aria-pressed="true"], #content .detailHeading>.favoriteButton[aria-pressed="true"] {color:#f87171}
-#content .entry .details {min-width:0;flex:1}
-#content .entry .cardName {margin:0 0 4px}
-#content .entry .thumb {background:#2b323b}
-#content .detailHeading>.favoriteButton {width:36px;height:36px;flex:0 0 36px;margin:0;border:1px solid var(--edge);border-radius:8px;background:#252c35;display:grid;place-items:center;padding:0}
-#content /* v0.2.8: show only available metadata; keep long text within its own column. */
-.entry .details, #content .copyRow>span, #content .detailHeading .detailTitle {min-width:0;overflow-wrap:anywhere;word-break:normal;white-space:normal}
-#content .entry .details .catalogueLine {white-space:normal;overflow-wrap:anywhere;line-height:1.3}
-#content .entry .details .catalogueDescription, #content .descriptionText, #content .copyDescription {white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}
-#content .entry>.favoriteButton {flex-shrink:0}
-#content .entry .details .tags {display:flex;flex-wrap:wrap}
-#content /* v0.2.9: fixed, #content noninteractive duplicate counter alongside favorite button */
-.entry .entryIndicators {display:flex;align-items:center;flex:0 0 auto;gap:12px;margin-left:auto}
-#content .entry .duplicateCount {box-sizing:border-box;display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;min-width:36px;border:1px solid var(--edge);border-radius:8px;background:#252c35;color:var(--text);font:700 14px 'Courier New',monospace;cursor:default;user-select:none;pointer-events:none}
-#content .entry .entryIndicators>.favoriteButton {box-sizing:border-box;flex:0 0 36px;width:36px;height:36px;min-width:36px;margin:0;border:1px solid var(--edge);border-radius:8px;background:#252c35;display:grid;place-items:center;font-size:23px;padding:0}
-#content .entry .entryIndicators>.favoriteButton[aria-pressed="true"] {color:#f87171}
-#content .entry .details {flex:1 1 0;min-width:0;overflow-wrap:anywhere}
-#content .entry .cardName, #content .entry .catalogueLine, #content .entry .catalogueDescription {overflow-wrap:anywhere;white-space:normal}
-#content /* v0.3.0: fixed card-header indicator order, #content resilient to long names */
-.entry .details {min-width:0;flex:1 1 0}
-#content .entry .cardHeader {display:flex;align-items:flex-start;gap:6px;min-width:0;width:100%;margin:0 0 4px}
-#content .entry .cardHeader .cardName {flex:1 1 auto;min-width:0;margin:0;overflow-wrap:anywhere;word-break:normal;line-height:1.25}
-#content .entry .cardHeader .entryIndicators {display:flex;align-items:center;gap:5px;flex:0 0 auto;margin:0;max-width:55%;min-width:0}
-#content .entry .headerTags {display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:2px;min-width:0;max-width:100%}
-#content .entry .headerTags:empty {display:none}
-#content .entry .headerTags small {display:inline-flex;font-size:17px;line-height:1.2;white-space:nowrap;color:var(--text)}
-#content .entry .cardHeader .duplicateCount, #content .entry .cardHeader .favoriteButton {flex:0 0 32px;width:32px;min-width:32px;height:32px;margin:0}
-#content .entry .cardHeader .favoriteButton {font-size:22px}
-#content /* v0.4.3: Optional two-column Detailed Grid for binder catalogue only. */
-#content.detailedGridView {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
-#content.detailedGridView .entry {display:flex;flex-direction:column;align-items:stretch;gap:8px;min-width:0;min-height:0;margin:0;padding:10px;position:relative}
-#content.detailedGridView .entry .thumb {display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:contain;flex:none;border-radius:7px}
-#content.detailedGridView .entry .thumb.placeholder {display:grid;place-items:center}
-#content.detailedGridView .entry .details {width:100%;min-width:0;flex:1}
-#content.detailedGridView .entry .cardHeader {display:flex;flex-direction:column;align-items:stretch;gap:5px}
-#content.detailedGridView .entry .cardName {text-align:center;font-size:15px;line-height:1.3;margin:0;overflow-wrap:anywhere}
-#content.detailedGridView .entry .entryIndicators {justify-content:center;flex-wrap:wrap;min-width:0}
-#content.detailedGridView .entry .catalogueLine {font-size:12px;line-height:1.35;margin:4px 0;overflow-wrap:anywhere}
-#content.detailedGridView .entry .catalogueDescription {font-size:12px;line-height:1.4;margin-top:7px;overflow-wrap:anywhere}
-#content.detailedGridView .entry input[type=checkbox] {position:absolute;top:15px;left:15px;z-index:1;background:var(--panel)}
-#content /* v0.4.5 — restrained grid refinements, #content image-overlay favorite, #content and compact visual settings */
-#content.detailedGridView .entry {gap:6px;padding:9px;font-family:'Courier New',Courier,monospace}
-#content.detailedGridView .gridCardPhoto {width:100%;position:relative;min-width:0;line-height:0}
-#content.detailedGridView .gridCardPhoto .thumb {width:100%;height:auto;aspect-ratio:3/4;object-fit:contain;display:block}
-#content.detailedGridView .gridCardPhoto>.favoriteButton {position:absolute;right:7px;bottom:7px;z-index:2;display:grid;place-items:center;box-sizing:border-box;width:32px;height:32px;min-width:32px;min-height:32px;padding:0;margin:0;border:1px solid var(--edge);border-radius:7px;background:rgba(32,38,46,.92);color:var(--text);font:22px/1 'Courier New',Courier,monospace;cursor:pointer}
-#content.detailedGridView .gridCardPhoto>.favoriteButton[aria-pressed="true"] {color:#f87171}
-#content.detailedGridView .gridCardPhoto>.favoriteButton:focus-visible {outline:2px solid var(--accent);outline-offset:2px}
-#content.detailedGridView .entry .details {display:flex;flex-direction:column;gap:0;font-family:'Courier New',Courier,monospace}
-#content.detailedGridView .entry .cardHeader {margin:0;gap:2px}
-#content.detailedGridView .entry .cardName {font-family:'Courier New',Courier,monospace;font-size:15px;font-weight:700}
-#content.detailedGridView .entry .entryIndicators {max-width:100%;justify-content:center;gap:5px;margin:0}
-#content.detailedGridView .entry .entryIndicators:empty {display:none}
-#content.detailedGridView .entry .gridCardPack {text-align:center;color:var(--muted);font-size:12px;line-height:1.3;overflow-wrap:anywhere;margin:2px 0 4px}
-#content.detailedGridView .entry .gridCardPack:empty {display:none}
-#content.detailedGridView .entry .gridCardMeta {display:flex;flex-direction:column;gap:2px;border-top:1px solid rgba(148,163,184,.18);padding-top:6px}
-#content.detailedGridView .entry .gridCardMeta:empty {display:none}
-#content.detailedGridView .entry .gridCardMeta .catalogueLine {margin:0;text-align:left;font-size:12px}
-#content.detailedGridView .entry .catalogueDescription {margin:6px 0 0;text-align:left;font-size:12px;white-space:pre-wrap}
-#content .binderCardPreview {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:4px;align-content:center}
-#content .binderCardPreview i {display:block;width:100%;height:100%;min-width:0;border:1px solid #8495a9;border-radius:3px;background:rgba(125,145,167,.2)}
-#content.cardBinderView {display:grid;grid-template-columns:repeat(var(--card-binder-columns,3),minmax(0,1fr));gap:9px;align-items:start}
-#content.cardBinderView .entry {display:block;position:relative;min-width:0;min-height:0;margin:0;padding:5px;border:1px solid var(--edge);border-radius:8px;cursor:pointer}
-#content.cardBinderView .binderCardPhoto {width:100%;min-width:0;line-height:0}
-#content.cardBinderView .binderCardPhoto .thumb {display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:contain;border-radius:4px}
-#content.cardBinderView .binderCardPhoto .thumb.placeholder {display:grid;place-items:center;line-height:1.3}
-#content.cardBinderView .entry>input[type=checkbox] {position:absolute;top:7px;left:7px;z-index:2}
-#content /* v0.4.8: counters grow with digit count rather than clipping. */
-.entry .duplicateCount, #content .entry .cardHeader .duplicateCount {flex:0 0 auto;width:auto;min-width:32px;max-width:100%;padding-inline:7px;white-space:nowrap;font-variant-numeric:tabular-nums;}
-#content.detailedGridView .gridCardPhoto .gridPhotoActions {position:absolute;right:7px;bottom:7px;z-index:2;display:flex;align-items:center;justify-content:flex-end;gap:5px;max-width:calc(100% - 14px);line-height:normal;}
-#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton {position:static;flex:0 0 32px;}
-#content.detailedGridView .gridCardPhoto .gridPhotoActions>.duplicateCount {display:grid;place-items:center;box-sizing:border-box;width:auto;min-width:32px;height:32px;padding-inline:7px;flex:0 1 auto;max-width:calc(100% - 37px);font:700 14px/1 'Courier New',Courier,monospace;white-space:nowrap;overflow:hidden;}
-#content /* v0.4.8 hotfix: restore favorite button rectangle inside grid overlay actions. */
-#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton {display:grid;place-items:center;box-sizing:border-box;width:32px;height:32px;min-width:32px;min-height:32px;padding:0;margin:0;border:1px solid var(--edge);border-radius:7px;background:rgba(32,38,46,.92);color:var(--text);font:22px/1 'Courier New',Courier,monospace;cursor:pointer;}
-#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton[aria-pressed="true"] {color:#f87171;}
-#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton:focus-visible {outline:2px solid var(--accent);outline-offset:2px;}
-#content /* v0.4.8 hotfix: grid descriptions and image-overlay tags */
-#content.detailedGridView .entry .catalogueDescription {border-top:1px solid rgba(148,163,184,.18);padding-top:6px;margin:6px 0 0;line-height:1.4}
-#content.detailedGridView .entry .gridCardMeta {margin-bottom:0}
-#content.detailedGridView .gridCardPhoto .gridPhotoTags {position:absolute;right:7px;bottom:46px;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;width:32px;max-height:calc(100% - 54px);overflow:hidden;line-height:1;background:transparent;border:0;padding:0;pointer-events:none}
-#content.detailedGridView .gridCardPhoto .gridPhotoTags small {font-size:22px;line-height:1.15;display:block;max-width:100%;text-align:center}
-
-/* v0.2.1: catalogue-specific layout overrides. Do not affect Home/Group pages. */
+/* v0.4.6: Card Binder View, image-only slots with adjustable columns */
+.catalogueChoices.fourChoices{grid-template-columns:repeat(4,minmax(0,1fr))}
+.binderCardPreview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:4px;align-content:center}
+.binderCardPreview i{display:block;width:100%;height:100%;min-width:0;border:1px solid #8495a9;border-radius:3px;background:rgba(125,145,167,.2)}
+.binderChoiceBottom{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;width:100%}
+.binderChoiceText{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.binderColumnStepper{display:flex;flex:none;gap:4px;align-items:center}
+.binderColumnStepper button,.binderColumnStepper output{display:grid;place-items:center;box-sizing:border-box;width:48px;height:48px;border:1px solid var(--edge);border-radius:8px;font:700 23px/1 'Courier New',Courier,monospace;background:var(--panel);color:var(--text);padding:0}
+.binderColumnStepper button{cursor:pointer}
+.binderColumnStepper button:disabled{opacity:.4;cursor:default}
+.binderColumnStepper button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 #content.cardBinderView{display:grid;grid-template-columns:repeat(var(--card-binder-columns,3),minmax(0,1fr));gap:9px;align-items:start}
-#content.cardBinderView>.entry{display:block;min-width:0;width:auto;min-height:0;margin:0;padding:5px;overflow:hidden;align-self:start}
-#content.cardBinderView>.entry .binderCardPhoto{display:block;width:100%;min-width:0;line-height:0}
-#content.cardBinderView>.entry .binderCardPhoto>.thumb{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:contain;max-width:none;max-height:none;border-radius:4px}
-#content.cardBinderView>.entry .binderCardPhoto>.thumb.placeholder{display:grid;place-items:center}
-#content.detailedGridView{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
-#content.detailedGridView>.entry{display:flex;flex-direction:column;align-items:stretch;min-width:0;width:auto;min-height:0;margin:0;padding:9px;gap:6px}
-#content.detailedGridView>.entry .gridCardPhoto{display:block;position:relative;width:100%;min-width:0;line-height:0}
-#content.detailedGridView>.entry .gridCardPhoto>.thumb{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:contain;max-width:none;max-height:none}
-#content.detailedGridView>.entry .gridCardPhoto>.thumb.placeholder{display:grid;place-items:center}
-#content.detailedGridView>.entry>.details{display:flex;flex-direction:column;flex:1 1 auto;width:100%;min-width:0;text-align:center}
-#content.detailedGridView>.entry .cardHeader{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%}
-#content.detailedGridView>.entry .cardName{margin:0;text-align:center}
-#content.detailedGridView>.entry .gridCardMeta{margin-top:auto}
-@media(max-width:420px){#content.cardBinderView{gap:5px}#content.detailedGridView{gap:6px}#content.detailedGridView>.entry{padding:6px}}
+#content.cardBinderView .entry{display:block;position:relative;min-width:0;min-height:0;margin:0;padding:5px;border:1px solid var(--edge);border-radius:8px;cursor:pointer}
+#content.cardBinderView .binderCardPhoto{width:100%;min-width:0;line-height:0}
+#content.cardBinderView .binderCardPhoto .thumb{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:contain;border-radius:4px}
+#content.cardBinderView .binderCardPhoto .thumb.placeholder{display:grid;place-items:center;line-height:1.3}
+#content.cardBinderView .entry>input[type=checkbox]{position:absolute;top:7px;left:7px;z-index:2}
+@media(max-width:520px){.catalogueChoices.fourChoices{gap:4px}.binderCardPreview{gap:2px}.binderChoiceBottom{gap:6px}.binderColumnStepper{gap:3px}.binderColumnStepper button,.binderColumnStepper output{width:44px;height:48px;font-size:22px}#content.cardBinderView{gap:5px}#content.cardBinderView .entry{padding:3px}}
 
-/* v0.2.2: scoped catalogue controls and image-overlay indicators. */
-.settingsChoiceGrid.catalogueChoices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;align-items:stretch}
-.settingsChoiceGrid.catalogueChoices .layoutPreview{min-width:0;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:6px}
-.settingsChoiceGrid.catalogueChoices .layoutSample{max-width:100%;min-width:0}
-#content.detailedGridView .gridCardPhoto .gridPhotoTags{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;right:7px;bottom:46px;z-index:3;pointer-events:none}
-#content.detailedGridView .gridCardPhoto .gridPhotoTags small{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;line-height:1.15}
-#content.detailedGridView .gridCardPhoto .gridPhotoActions{position:absolute;right:7px;bottom:7px;z-index:3}
-@media(max-width:520px){.settingsChoiceGrid.catalogueChoices{gap:4px}.settingsChoiceGrid.catalogueChoices .layoutPreview{padding:4px}#content.detailedGridView .gridCardPhoto .gridPhotoTags{right:5px;bottom:40px}#content.detailedGridView .gridCardPhoto .gridPhotoActions{right:5px;bottom:5px}}
+/* v0.4.7: Default binder view favorites counter; preserve existing grid and tile sizing. */
+#content:not(.binderCompactView) .binderDefaultCounts{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;}
+#content:not(.binderCompactView) .binderDefaultCounts small{white-space:nowrap;}
 
-/* v0.2.3 — scoped layout regression fixes */
-#content:not(.detailedGridView):not(.itemBinderView):not(.cardBinderView):not(.groupPageTiles)>.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:10px;width:100%}
-#content.compactListing>.grid{display:flex!important;flex-direction:column;width:100%}
-#content.compactListing>.grid>.binder{width:100%;max-width:none}
-#content.groupPageTiles.groupCompactTiles>.grid>.groupTile{width:100%;max-width:none}
-#content:has(#heroArea){display:block!important;grid-template-columns:none!important}
-#content:has(#heroArea)>.panel{width:min(100%,760px);max-width:760px;margin-inline:auto;box-sizing:border-box}
-#content:has(#heroArea) #heroArea{max-width:100%;margin-inline:auto}
-#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton{border:1px solid var(--edge)!important;border-radius:7px!important;background:rgba(32,38,46,.92)!important;min-width:32px;min-height:32px;display:grid;place-items:center}
-.editorConfirmShade{position:fixed;inset:0;z-index:10020;display:grid;place-items:center;background:rgba(0,0,0,.65);padding:12px}
-.editorConfirm{width:min(100%,380px);padding:18px;border:1px solid var(--edge);border-radius:12px;background:var(--panel);color:var(--text);font-family:'Courier New',Courier,monospace;box-shadow:0 12px 48px #0008}
-.editorConfirm h3{font-size:16px;margin:0 0 12px}.editorConfirm p{font-size:13px;line-height:1.5}.editorConfirm .actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+/* v0.4.8: counters grow with digit count rather than clipping. */
+.entry .duplicateCount,.entry .cardHeader .duplicateCount{flex:0 0 auto;width:auto;min-width:32px;max-width:100%;padding-inline:7px;white-space:nowrap;font-variant-numeric:tabular-nums;}
+@media(max-width:520px){.entry .duplicateCount,.entry .cardHeader .duplicateCount{flex:0 0 auto;width:auto;min-width:28px;padding-inline:5px;}}
+#content.detailedGridView .gridCardPhoto .gridPhotoActions{position:absolute;right:7px;bottom:7px;z-index:2;display:flex;align-items:center;justify-content:flex-end;gap:5px;max-width:calc(100% - 14px);line-height:normal;}
+#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton{position:static;flex:0 0 32px;}
+#content.detailedGridView .gridCardPhoto .gridPhotoActions>.duplicateCount{display:grid;place-items:center;box-sizing:border-box;width:auto;min-width:32px;height:32px;padding-inline:7px;flex:0 1 auto;max-width:calc(100% - 37px);font:700 14px/1 'Courier New',Courier,monospace;white-space:nowrap;overflow:hidden;}
+@media(max-width:520px){#content.detailedGridView .gridCardPhoto .gridPhotoActions{right:5px;bottom:5px;gap:4px;max-width:calc(100% - 10px)}#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton{flex-basis:29px}#content.detailedGridView .gridCardPhoto .gridPhotoActions>.duplicateCount{min-width:29px;height:29px;padding-inline:5px;max-width:calc(100% - 33px);}}
 
-/* v0.2.4: isolate each catalogue page from item-view layout rules. */
-#content.homePageTiles,#content.groupPageTiles{display:block!important;grid-template-columns:none!important;width:100%;max-width:none;min-width:0}
-#content.homePageTiles>.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:9px;width:100%;align-items:stretch}
-#content.homePageTiles.compactListing>.grid{display:flex;flex-direction:column;gap:6px;width:100%}
-#content.homePageTiles.compactListing>.grid>.binder{width:100%;max-width:none}
-#content.groupPageTiles:not(.groupCompactTiles)>.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:9px;width:100%;align-items:stretch}
-#content.groupPageTiles.groupCompactTiles>.grid{display:flex;flex-direction:column;gap:6px;width:100%}
-#content.groupPageTiles.groupCompactTiles>.grid>.groupTile{width:100%;max-width:none}
-#content.groupPageTiles .groupTileDescription{display:block;max-width:100%;font:12px/1.4 'Courier New',Courier,monospace;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere;text-align:center}
-#content.groupPageTiles.groupCompactTiles .groupTileDescription{display:none}
-@media(max-width:520px){#content.homePageTiles:not(.compactListing)>.grid,#content.groupPageTiles:not(.groupCompactTiles)>.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* v0.4.8 hotfix: restore favorite button rectangle inside grid overlay actions. */
+#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton{display:grid;place-items:center;box-sizing:border-box;width:32px;height:32px;min-width:32px;min-height:32px;padding:0;margin:0;border:1px solid var(--edge);border-radius:7px;background:rgba(32,38,46,.92);color:var(--text);font:22px/1 'Courier New',Courier,monospace;cursor:pointer;}
+#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton[aria-pressed="true"]{color:#f87171;}
+#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+:root[data-theme="light"] #content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton{background:rgba(237,242,247,.94);color:#23384f;}
+:root[data-theme="light"] #content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton[aria-pressed="true"]{color:#b42338;}
+@media(max-width:520px){#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton{width:29px;height:29px;min-width:29px;min-height:29px;font-size:20px;}}
 
-/* v0.2.6: content-driven Collection Page Default tiles; no reserved empty vertical space. */
-#content.groupPageTiles:not(.groupCompactTiles)>.grid{align-items:start}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTile{min-height:0;height:auto;justify-content:flex-start;gap:5px;padding:10px 11px}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileEmoji{font-size:30px;line-height:1.05}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileCounts{margin-top:5px}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileDescription{margin:0;line-height:1.3}
-@media(max-width:520px){#content.groupPageTiles:not(.groupCompactTiles) .groupTile{min-height:0;padding:9px 8px;gap:4px}}
-
-/* v0.2.7: preserve native hidden behavior inside modals and isolate group grid */
-#modalRoot [hidden],#modalRoot .cardOnlyFields[hidden],#modalRoot #collectibleTypeFields[hidden]{display:none!important}
-#content.groupPageTiles:not(.groupCompactTiles)>.grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),260px));justify-content:start}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTile{width:100%}
-#content .empty{display:flex;align-items:center;justify-content:center;text-align:center;min-height:160px}
-.otherCustomRow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:8px;align-items:end;margin:8px 0}
-.otherCustomRow .field{min-width:0}.otherCustomRow .removeOtherField{margin-bottom:2px}
-@media(max-width:520px){#content.groupPageTiles:not(.groupCompactTiles)>.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.otherCustomRow{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:5px}}
-
-/* v0.2.8: empty states occupy the entire catalogue grid, centered on all page types. */
-#content > .empty {width:100%;max-width:none;min-width:0;box-sizing:border-box;grid-column:1/-1;justify-self:stretch;align-self:stretch;display:flex;align-items:center;justify-content:center;text-align:center;min-height:180px;margin:0 auto;padding:20px;}
-#content.detailedGridView > .empty,#content.cardBinderView > .empty,#content.itemBinderView > .empty {grid-column:1/-1;}
-/* Other: first two populated custom field/value pairs under the name in Detailed Grid. */
-#content.detailedGridView .entry .otherGridDetails {display:flex;flex-direction:column;gap:3px;width:100%;min-width:0;margin-top:4px;}
-#content.detailedGridView .entry .otherGridDetails:empty {display:none;}
-#content.detailedGridView .entry .otherGridDetails .catalogueLine {margin:0;text-align:center;font:12px/1.4 'Courier New',Courier,monospace;overflow-wrap:anywhere;}
-
-/* v0.2.9: larger, wrapping page headings on all three navigation levels. */
-#archiveHeading{font-family:'Courier New',Courier,monospace;font-size:clamp(35px,5.2vw,46px);line-height:1.2;overflow-wrap:anywhere;word-break:normal;margin:5px 0 14px}
-@media(max-width:520px){#archiveHeading{font-size:clamp(31px,8vw,39px);line-height:1.22;margin:6px 0 16px}}
-/* v0.2.9: default group tiles use their content height, with no forced empty space. */
-#content.groupPageTiles:not(.groupCompactTiles) .groupTile{min-height:0!important;height:auto!important;gap:3px!important;padding:8px 9px!important;justify-content:flex-start!important}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileEmoji{font-size:27px;line-height:1}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileName{line-height:1.2}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileCounts{margin-top:2px!important}
-#content.groupPageTiles:not(.groupCompactTiles)>.grid{align-items:start!important}
-
-/* v0.2.10: compact, fixed-size default tiles on both catalogue levels.
-   The compact list modes intentionally retain full-width rows. */
-#content.homePageTiles:not(.compactListing)>.grid,
-#content.groupPageTiles:not(.groupCompactTiles)>.grid{
-  display:grid!important;
-  grid-template-columns:repeat(auto-fill,minmax(0,176px))!important;
-  justify-content:start!important;
-  align-items:start!important;
-  gap:8px!important;
-}
-#content.homePageTiles:not(.compactListing)>.grid>.binder,
-#content.groupPageTiles:not(.groupCompactTiles)>.grid>.groupTile{
-  width:100%;min-width:0;max-width:176px;
-  padding:9px!important;
-}
-#content.homePageTiles:not(.compactListing)>.grid>.binder{min-height:76px;gap:7px}
-#content.homePageTiles:not(.compactListing) .shelfTileIcon{flex-basis:30px;font-size:27px}
-#content.homePageTiles:not(.compactListing) .shelfTileInfo{min-width:0}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileCounts{width:100%;flex-wrap:wrap}
-@media(max-width:390px){
- #content.homePageTiles:not(.compactListing)>.grid,
- #content.groupPageTiles:not(.groupCompactTiles)>.grid{
-   grid-template-columns:repeat(2,minmax(0,1fr))!important;
- }
- #content.homePageTiles:not(.compactListing)>.grid>.binder,
- #content.groupPageTiles:not(.groupCompactTiles)>.grid>.groupTile{max-width:none}
-}
-/* v0.2.10: accessible, inline field errors instead of transient notifications. */
-#modalRoot .field input.fieldInvalid,#modalRoot .field textarea.fieldInvalid,#modalRoot .field select.fieldInvalid{border-color:#f0717a!important;box-shadow:0 0 0 1px #f0717a;outline-color:#f0717a}
-#modalRoot .fieldError{display:block;color:#ff9299;font:12px/1.4 'Courier New',Courier,monospace;margin-top:5px;white-space:normal}
-
-/* v0.2.11: fluid, responsive default catalogue grids; do not alter compact list or item views. */
-#content.homePageTiles:not(.compactListing)>.grid,
-#content.groupPageTiles:not(.groupCompactTiles)>.grid{
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))!important;
-  justify-content:stretch!important;
-  align-items:start!important;
-}
-#content.homePageTiles:not(.compactListing)>.grid>.binder,
-#content.groupPageTiles:not(.groupCompactTiles)>.grid>.groupTile{
-  max-width:none!important;width:100%;min-width:0;
-}
-@media(max-width:520px){
-  #content.homePageTiles:not(.compactListing)>.grid,
-  #content.groupPageTiles:not(.groupCompactTiles)>.grid{
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-  }
-}
-
-/* v0.2.12: bounded Group tiles and separate descriptions. */
-#content.groupPageTiles:not(.groupCompactTiles)>.grid{grid-template-columns:repeat(auto-fill,minmax(0,260px))!important;justify-content:start!important}
-#content.groupPageTiles:not(.groupCompactTiles)>.grid>.groupTile{max-width:260px!important}
-@media(max-width:540px){#content.groupPageTiles:not(.groupCompactTiles)>.grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}#content.groupPageTiles:not(.groupCompactTiles)>.grid>.groupTile{max-width:none!important}}
-#content.groupPageTiles.groupCompactTiles .groupTileDescription{display:block!important;width:100%;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.45 'Courier New',Courier,monospace;color:var(--muted)}
-#content.homePageTiles.compactListing .binder{display:flex;flex-wrap:wrap}
-#content.homePageTiles.compactListing .homeCompactDescription{display:block;flex:0 0 100%;width:100%;color:var(--muted);font:12px/1.45 'Courier New',Courier,monospace;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left}
-#context .binderStats{min-width:0;flex-wrap:wrap}
-#context .collectionPageDescription{display:block;flex-basis:100%;width:100%;margin-top:7px;color:var(--muted);font:12px/1.45 'Courier New',Courier,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
-#modalRoot .descriptionCounter{display:block;text-align:right;margin-top:4px;color:var(--muted);font:11px/1.4 'Courier New',Courier,monospace}
-
-/* v0.2.13: Compact Group rows keep the title/description together. */
-#content.groupPageTiles.groupCompactTiles .groupTile{
- display:flex!important;flex-direction:row!important;align-items:center!important;
- gap:10px!important;min-height:0!important;padding:10px 12px!important;
-}
-#content.groupPageTiles.groupCompactTiles .groupTileEmoji{flex:0 0 auto!important}
-#content.groupPageTiles.groupCompactTiles .groupTileText{
- display:flex;flex-direction:column;flex:1 1 auto;min-width:0;
- align-items:flex-start;gap:3px;text-align:left;
-}
-#content.groupPageTiles.groupCompactTiles .groupTileName{
- display:block;flex:none!important;width:100%;min-width:0;
- white-space:normal;overflow-wrap:break-word;word-break:normal;
- line-height:1.3;
-}
-#content.groupPageTiles.groupCompactTiles .groupTileDescription{
- display:block!important;flex:none!important;width:100%;min-width:0;
- margin:0;text-align:left;white-space:pre-wrap;
- overflow-wrap:break-word;word-break:normal;
-}
-#content.groupPageTiles.groupCompactTiles .groupTileCounts{
- flex:0 0 auto!important;align-self:center;margin-left:auto;white-space:nowrap;
-}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileText{
- display:flex;flex-direction:column;align-items:center;min-width:0;gap:3px;
-}
-#context .groupPageDescription{
- display:block;flex-basis:100%;width:100%;margin-top:7px;
- color:var(--muted);font:12px/1.45 'Courier New',Courier,monospace;
- white-space:pre-wrap;overflow-wrap:break-word;
-}
-.groupManageRow>span{flex:1;min-width:0;overflow-wrap:break-word}
-.groupManageRow>button{flex:0 0 auto}
-.groupManageRow>button:disabled{opacity:.3;cursor:default}
-@media(max-width:420px){
- #content.groupPageTiles.groupCompactTiles .groupTile{gap:7px!important;padding:9px 8px!important}
- #content.groupPageTiles.groupCompactTiles .groupTileCounts{gap:4px}
-}
-
-/* v0.2.14 — single-spacing rhythm. Keep title-to-search and legal-footer separation. */
-:root{--archive-line-gap:4px}
-/* Do not change the generous heading/search-bar separation. */
-header{margin-bottom:0}
-header h1{margin-bottom:7px}
-.toolbar{margin-top:0;margin-bottom:0}
-/* Remove unused placeholder gaps between search, status and catalogue statistics. */
-#status{margin:var(--archive-line-gap) 0 0;line-height:1.25}
-#offlineInfo.connectionStatus{margin:var(--archive-line-gap) 0 0;line-height:1.25}
-#chips{margin:var(--archive-line-gap) 0 0;gap:var(--archive-line-gap)}
-#chips:empty{display:none}
-.catalogueMeta{margin:var(--archive-line-gap) 0;align-items:center;gap:6px}
-.catalogueMeta .subhead{margin:0;align-items:center;gap:6px;min-height:0}
-.catalogueMeta .binderStats{align-content:center;row-gap:var(--archive-line-gap)}
-.catalogueMeta .binderCounter{line-height:1.25}
-.catalogueMeta .icon{align-self:center}
-#context .collectionPageDescription,#context .groupPageDescription{margin-top:var(--archive-line-gap);line-height:1.3}
-#content{margin-top:0}
-#content>.grid{row-gap:var(--archive-line-gap)}
-#content .groupTileText{gap:var(--archive-line-gap)}
-#content.groupPageTiles.groupCompactTiles .groupTileText{gap:var(--archive-line-gap)}
-#content.groupPageTiles.groupCompactTiles .groupTile{margin:0}
-#content .entry{margin-bottom:var(--archive-line-gap)}
-#content .entry .details div{margin:var(--archive-line-gap) 0}
-#content .entry .cardName{margin-bottom:var(--archive-line-gap)}
-/* Forms and Settings: tighten section spacing without reducing touch target dimensions. */
-.settingsSection{margin:var(--archive-line-gap) 0}
-.settingsSection h3{margin:0 0 var(--archive-line-gap)}
-.settingsSection .help{margin:var(--archive-line-gap) 0}
-.modal h2{margin:0 0 var(--archive-line-gap)}
-.modal h3{margin:var(--archive-line-gap) 0}
-.modal .field{margin:var(--archive-line-gap) 0}
-.modal .field input,.modal .field select,.modal .field textarea{margin-top:var(--archive-line-gap)}
-.modal .actions{margin-top:var(--archive-line-gap)}
-.modal .listRow{padding:7px 0}
-/* Explicit exception: preserve the original footer disclaimer breathing room. */
-.copyrightFooter{margin-top:24px;padding-top:12px}
-@media(max-width:520px){.copyrightFooter{margin-top:18px}}
-
-/* v0.2.15 — align statistics with action buttons, independent of descriptions.
-   Retain the explicitly requested heading-to-search and footer separation. */
-
-.catalogueMeta #context.subhead{align-items:flex-start!important;min-height:40px}
-.catalogueMeta #context .binderStats{
-  display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;
-  flex-wrap:nowrap;align-self:flex-start;gap:0;min-width:0;min-height:40px;
-}
-.catalogueMeta #context .binderCounter{
-  display:flex;align-items:center;min-height:40px;line-height:1.3;
-  white-space:normal;overflow-wrap:normal;
-}
-.catalogueMeta #context .collectionPageDescription,
-.catalogueMeta #context .groupPageDescription{
-  display:block;flex:none;width:100%;margin:0 0 0;
-  line-height:1.3;white-space:pre-wrap;overflow-wrap:break-word;
-}
-.catalogueMeta #context>.icon,.catalogueMeta>#sort{
-  align-self:flex-start!important;flex-shrink:0;
-}
-/* No extra gap before the first catalogue tile. */
-.catalogueMeta{margin-bottom:var(--archive-line-gap)}
-
-/* v0.2.16 — match secondary action buttons to toolbar buttons. */
-.catalogueMeta #context>.icon,
-.catalogueMeta>#sort{
-  box-sizing:border-box;width:44px;height:44px;min-width:44px;flex:0 0 44px;
-  padding:0;display:grid;place-items:center;border-radius:9px;
-  align-self:center!important;
-}
-.catalogueMeta #context>.icon svg,.catalogueMeta>#sort svg{width:21px;height:21px}
-.catalogueMeta{align-items:flex-start!important}
-.catalogueMeta #context.subhead{min-height:44px;align-items:flex-start!important}
-.catalogueMeta #context .binderStats{min-height:44px;justify-content:flex-start}
-.catalogueMeta #context .binderCounter{min-height:44px;display:flex;align-items:center}
-.catalogueMeta .homeCounts{
-  min-height:44px;display:flex;align-items:center;line-height:1.3;
-}
-/* Description panel uses the same existing panel border/background palette. */
-#context .collectionPageDescription,
-#context .groupPageDescription{
-  box-sizing:border-box;display:block;flex:none;width:100%;
-  margin:3px 0 0;padding:8px 10px;
-  background:var(--panel);border:1px solid #3b444e;border-radius:9px;
-  color:var(--muted);font:12px/1.4 'Courier New',Courier,monospace;
-  white-space:pre-wrap;overflow-wrap:break-word;
-}
-/* Detail list: full populated fields, without affecting compact/grid/binder views. */
-#content:not(.compactView):not(.detailedGridView):not(.cardBinderView) .entry .listField{
-  font:12px/1.35 'Courier New',Courier,monospace;
-  color:var(--text);white-space:pre-wrap;overflow-wrap:break-word;
-  margin:3px 0;
-}
-#content .entry .listField>span{color:var(--muted)}
-@media(max-width:520px){
-  .catalogueMeta #context>.icon,.catalogueMeta>#sort{
-    width:44px;height:44px;min-width:44px;flex-basis:44px;
-  }
-}
-/* No label heading on individual item detail metadata tables. */
-.bookDetailView{margin-top:6px}
-
-/* v0.2.17 — descriptions span the complete statistics/action row. */
-.catalogueMeta:has(>.catalogueDescriptionRow){display:grid!important;grid-template-columns:minmax(0,1fr) 44px;gap:5px 6px!important;align-items:start!important}
-.catalogueMeta:has(>.catalogueDescriptionRow)>#context{grid-column:1;grid-row:1;min-width:0}
-.catalogueMeta:has(>.catalogueDescriptionRow)>#sort{grid-column:2;grid-row:1;justify-self:end}
-.catalogueMeta>.catalogueDescriptionRow{grid-column:1/-1;grid-row:2;min-width:0;width:100%;margin:0;padding:0}
-.catalogueMeta>.catalogueDescriptionRow>.collectionPageDescription,
-.catalogueMeta>.catalogueDescriptionRow>.groupPageDescription{
- display:block;width:100%;box-sizing:border-box;margin:0!important;padding:8px 10px;
- background:var(--panel);border:1px solid #3b444e;border-radius:9px;
- color:var(--muted);font:12px/1.4 'Courier New',Courier,monospace;
- white-space:pre-wrap;overflow-wrap:break-word;
-}
-/* Detailed List: up to six populated detail fields per column. */
-#content:not(.compactView):not(.detailedGridView):not(.cardBinderView) .entry .listFieldColumns{
- display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 24px;width:100%;min-width:0;margin:4px 0;
-}
-#content:not(.compactView):not(.detailedGridView):not(.cardBinderView) .entry .listFieldColumn{
- flex:0 1 310px;min-width:min(100%,220px);display:flex;flex-direction:column;gap:4px;margin:0;
-}
-#content:not(.compactView):not(.detailedGridView):not(.cardBinderView) .entry .listField{
- display:flex;align-items:baseline;gap:5px;margin:0!important;
- color:var(--text);font:12px/1.4 'Courier New',Courier,monospace;
- white-space:normal;overflow-wrap:break-word;min-width:0;
-}
-#content .entry .listField .listFieldLabel{color:var(--muted);flex:0 0 auto}
-#content .entry .listField .listFieldValue{color:var(--text);min-width:0;overflow-wrap:anywhere}
-@media(max-width:620px){
- #content:not(.compactView):not(.detailedGridView):not(.cardBinderView) .entry .listFieldColumn{flex:1 1 100%;min-width:0}
- #content:not(.compactView):not(.detailedGridView):not(.cardBinderView) .entry .listField{flex-wrap:wrap}
-}
-/* Individual Item View: labels sit near their values, without a huge empty middle column. */
-#content .bookDetailView{margin:5px 0 0;max-width:100%}
-#content .bookDetailView dl{display:flex;flex-direction:column;gap:5px;margin:0;padding:0}
-#content .bookDetailView dl>div{
- display:grid;grid-template-columns:minmax(95px,max-content) minmax(0,1fr);
- column-gap:12px;align-items:baseline;justify-content:start;
- width:fit-content;max-width:100%;margin:0;
- font:13px/1.35 'Courier New',Courier,monospace;
-}
-#content .bookDetailView dt{opacity:1;color:var(--muted);overflow-wrap:break-word}
-#content .bookDetailView dd{margin:0;color:var(--text);overflow-wrap:anywhere;min-width:0}
-@media(max-width:520px){
- #content .bookDetailView dl>div{grid-template-columns:minmax(90px,max-content) minmax(0,1fr);column-gap:9px}
-}
-
-/* v0.2.18 — CA-inspired Settings previews; preserve Archive behavior. */
-.settingsSection .themeChoices{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.settingsSection .themePreview{
-  background:var(--panel);color:var(--text);border:1px solid var(--edge);
-  min-height:112px;display:flex;align-items:center;justify-content:center;
-  gap:5px;padding:9px 6px;border-radius:9px;
-}
-.settingsSection .themePreview.isSelected,
-.settingsSection .catalogueOption.isSelected{
-  border:2px solid #dce7f6!important;box-shadow:none!important;
-}
-.themeMiniWindow{
-  width:min(120px,90%);height:55px;display:flex;flex-direction:column;
-  justify-content:center;gap:6px;padding:9px 8px;border:1px solid #657080;
-  border-radius:5px;background:#151b22;
-}
-.themeMiniWindow i{display:block;height:8px;border-radius:3px;background:#53606e}
-.themeMiniWindow i:first-child{width:60%;background:#e1e7ee}
-.themeMiniWindow i:nth-child(2){width:95%}
-.themeMiniWindow i:nth-child(3){width:73%}
-.lightPreview .themeMiniWindow{background:#f5f7fa;border-color:#8797a9}
-.lightPreview .themeMiniWindow i{background:#d8e1eb}
-.lightPreview .themeMiniWindow i:first-child{background:#334559}
-.themePreview strong{font-size:13px}
-.themePreview small{color:var(--muted);font:10px/1.3 'Courier New',monospace;text-align:center}
-.settingsChoiceGrid.catalogueChoices{
-  grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
-}
-.settingsChoiceGrid.catalogueChoices .layoutPreview{
-  min-height:94px;width:100%;padding:9px;display:flex;
-  align-items:center;justify-content:center;border:1px solid var(--edge);
-  border-radius:9px;background:var(--panel);overflow:hidden;
-}
-.catalogueChoiceDescription{
-  border-top:1px solid var(--edge);margin-top:9px;padding-top:9px;
-  display:flex;flex-direction:column;gap:5px;
-  font:11px/1.4 'Courier New',monospace;
-}
-.catalogueDescriptionTitle{font-size:12px;color:var(--text)}
-.catalogueDescriptionBody{color:var(--muted)}
-.previewTiles,.previewGrid,.previewRows,.previewBinder,.previewDetailed{
-  display:flex;width:100%;gap:6px;align-items:center;justify-content:center;
-}
-.previewTiles>i,.previewGrid>i{
-  flex:1;min-width:0;height:58px;border:1px solid #526476;border-radius:4px;
-  background:#303c49;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:5px;padding:5px;
-}
-.previewTiles b,.previewGrid b{width:19px;height:18px;border-radius:3px;background:#879bad}
-.previewTiles em,.previewGrid em{height:4px;width:85%;background:#879bad;border-radius:3px}
-.previewTiles em:last-child,.previewGrid em:last-child{width:60%}
-.previewRows{flex-direction:column;gap:5px}
-.previewRows>i{
-  display:flex;align-items:center;gap:6px;width:100%;height:19px;
-  padding:4px;border:1px solid #526476;border-radius:3px;background:#303c49;
-}
-.previewRows b{width:13px;height:13px;flex:none;background:#879bad;border-radius:3px}
-.previewRows em{height:4px;flex:1;background:#879bad;border-radius:3px}
-.previewRows small{width:18%;height:4px;background:#879bad;border-radius:3px}
-.previewDetailed{justify-content:flex-start}
-.previewDetailed>b{width:42px;height:61px;border:1px solid #526476;border-radius:4px;background:#303c49}
-.previewDetailed>span{flex:1;display:flex;flex-direction:column;gap:7px}
-.previewDetailed i{height:5px;border-radius:3px;background:#879bad;width:92%}
-.previewDetailed i:last-child{width:65%}
-.previewGrid>i{height:65px;justify-content:flex-start}
-.previewGrid b{height:34px;width:100%;background:#526476}
-.previewBinder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
-.previewBinder i{height:33px;border:1px solid #526476;border-radius:3px;background:#303c49}
-.settingsToggleRow{min-height:52px;align-items:center!important;padding:4px 0}
-.settingsToggleRow>span{display:flex;flex-direction:column;justify-content:center;gap:5px}
-.settingsToggleRow>span strong{line-height:1.3}
-.settingsToggleRow>span small{display:block;line-height:1.3}
-button.switch{
-  flex:0 0 76px;width:76px;height:42px;min-width:76px;min-height:42px;
-  padding:4px;border:1px solid #a94c4c;border-radius:9px;
-  background:#4a292e;display:flex;align-items:center;justify-content:flex-start;
-}
-button.switch.on{background:#234936;border-color:#408b65;justify-content:flex-end}
-button.switch span{
-  display:block;width:32px;height:32px;border-radius:5px;
-  background:#c9656d;flex:none;
-}
-button.switch.on span{background:#4caf82}
-button.switch:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-@media(max-width:380px){
- .settingsChoiceGrid.catalogueChoices{gap:5px}
- .settingsChoiceGrid.catalogueChoices .layoutPreview{min-height:78px;padding:6px}
- .themePreview small{font-size:9px}
-}
-
-/* v0.2.19: each subsequent sentence in authored UI guidance starts a new line. */
-.sentenceLine{display:block;line-height:inherit;margin:0;padding:0}
-
-
-/* Archive v0.2.21 — Balanced Minimalist, HOME ONLY.
-   All selectors are scoped to the Home context to avoid changing Collection, Group,
-   Item, Settings, modal and catalogue behavior. */
-:root {
-  --archive-home-surface:#1b222b;
-  --archive-home-surface-hover:#242e39;
-  --archive-home-border:#394655;
-  --archive-home-primary:#edf1f5;
-  --archive-home-secondary:#95a3b3;
-}
-:root[data-theme="light"] {
-  --archive-home-surface:#ffffff;
-  --archive-home-surface-hover:#f2f5f8;
-  --archive-home-border:#b8c4d1;
-  --archive-home-primary:#243344;
-  --archive-home-secondary:#596a7b;
-}
-/* The Home content class is only present on the Home route. */
-#content.homePageTiles>.grid{gap:8px!important;}
-#content.homePageTiles>.grid>.binder{
-  background:var(--archive-home-surface);
-  border:1px solid var(--archive-home-border);
-  border-radius:8px;
-  box-shadow:none;
-  transition:background-color .15s ease,border-color .15s ease;
-}
-#content.homePageTiles>.grid>.binder:hover{
-  background:var(--archive-home-surface-hover);
-  border-color:var(--archive-home-secondary);
-}
-#content.homePageTiles>.grid>.binder:focus-visible{
-  outline:2px solid var(--archive-home-secondary);
-  outline-offset:2px;
-}
-#content.homePageTiles .shelfTileName{
-  color:var(--archive-home-primary);
-  background:transparent;
-  padding:0;
-  margin:0;
-  border-radius:0;
-  font-family:'Courier New',Courier,monospace;
-  font-weight:700;
-  line-height:1.3;
-}
-#content.homePageTiles .shelfTypeLabel,
-#content.homePageTiles .shelfTileInfo>small,
-#content.homePageTiles .homeCompactDescription{
-  color:var(--archive-home-secondary);
-  opacity:1;
-}
-#content.homePageTiles .shelfTileInfo{gap:4px;}
-#content.homePageTiles:not(.compactListing)>.grid>.binder{
-  min-height:82px;
-  padding:11px!important;
-  gap:9px;
-}
-#content.homePageTiles:not(.compactListing) .shelfTileIcon{
-  flex-basis:32px;
-  font-size:28px;
-}
-#content.homePageTiles.compactListing>.grid>.binder{
-  min-height:48px;
-  padding:9px 11px;
-  gap:9px;
-}
-/* Preserve two-column mobile default view and full-width compact list. */
-@media(max-width:520px){
-  #content.homePageTiles:not(.compactListing)>.grid>.binder{
-    min-height:78px;
-    padding:9px!important;
-    gap:7px;
-  }
-  #content.homePageTiles:not(.compactListing) .shelfTileIcon{
-    flex-basis:27px;
-    font-size:25px;
-  }
-}
-
-/* Archive v0.2.22 — Balanced Minimalist: COLLECTION / GROUP TILES ONLY.
-   Scope: #content.groupPageTiles; no shared .binder or global element overrides.
-   Reuse v0.2.21 Home palette so light/dark theme behavior stays consistent. */
-#content.groupPageTiles>.grid{gap:8px!important}
-#content.groupPageTiles>.grid>.groupTile{
-  background:var(--archive-home-surface);
-  border:1px solid var(--archive-home-border);
-  border-radius:8px;
-  box-shadow:none;
-  font-family:'Courier New',Courier,monospace;
-  transition:background-color .15s ease,border-color .15s ease;
-}
-#content.groupPageTiles>.grid>.groupTile:hover{
-  background:var(--archive-home-surface-hover);
-  border-color:var(--archive-home-secondary);
-}
-#content.groupPageTiles>.grid>.groupTile:focus-visible{
-  outline:2px solid var(--archive-home-secondary);
-  outline-offset:2px;
-}
-#content.groupPageTiles .groupTileName{
-  color:var(--archive-home-primary);
-  background:transparent;
-  font-weight:700;
-  line-height:1.3;
-  overflow-wrap:anywhere;
-}
-#content.groupPageTiles .groupTileCounts small,
-#content.groupPageTiles .groupTileDescription{
-  color:var(--archive-home-secondary);
-  opacity:1;
-}
-#content.groupPageTiles:not(.groupCompactTiles)>.grid>.groupTile{
-  padding:11px!important;
-  gap:6px!important;
-}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileEmoji{
-  font-size:28px;
-  line-height:1.1;
-}
-#content.groupPageTiles:not(.groupCompactTiles) .groupTileCounts{
-  margin-top:4px!important;
-}
-#content.groupPageTiles.groupCompactTiles>.grid>.groupTile{
-  padding:9px 11px!important;
-  gap:9px!important;
-  min-height:48px;
-}
-#content.groupPageTiles.groupCompactTiles .groupTileText{
-  min-width:0;
-}
-@media(max-width:520px){
-  #content.groupPageTiles:not(.groupCompactTiles)>.grid>.groupTile{
-    padding:9px!important;
-    gap:5px!important;
-  }
-  #content.groupPageTiles:not(.groupCompactTiles) .groupTileEmoji{font-size:25px}
-  #content.groupPageTiles.groupCompactTiles>.grid>.groupTile{padding:9px!important;gap:7px!important}
-}
-
-/* Archive v0.2.23 — Item catalogue: Compact + Detailed List only.
-   Scoped to opened Group item lists; excludes Detailed Grid, Binder, Home, search. */
-#content.archiveItemCatalogue:not(.detailedGridView):not(.cardBinderView)>.entry{
-  background:var(--archive-home-surface);
-  border:1px solid var(--archive-home-border);
-  border-radius:8px;
-  box-shadow:none;
-  font-family:'Courier New',Courier,monospace;
-  gap:9px;
-  padding:10px;
-  transition:background-color .15s ease,border-color .15s ease;
-}
-#content.archiveItemCatalogue:not(.detailedGridView):not(.cardBinderView)>.entry:hover{
-  background:var(--archive-home-surface-hover);
-  border-color:var(--archive-home-secondary);
-}
-#content.archiveItemCatalogue:not(.detailedGridView):not(.cardBinderView)>.entry:focus-visible{
-  outline:2px solid var(--archive-home-secondary);outline-offset:2px;
-}
-#content.archiveItemCatalogue:not(.detailedGridView):not(.cardBinderView)>.entry .cardName{
-  color:var(--archive-home-primary);
-  font-family:'Courier New',Courier,monospace;
-  font-size:15px;line-height:1.3;font-weight:700;
-}
-#content.archiveItemCatalogue:not(.detailedGridView):not(.cardBinderView)>.entry .thumb{
-  border:1px solid var(--archive-home-border);border-radius:6px;
-}
-#content.archiveItemCatalogue:not(.compactView):not(.detailedGridView):not(.cardBinderView)>.entry .listFieldColumns{gap:10px}
-#content.archiveItemCatalogue:not(.compactView):not(.detailedGridView):not(.cardBinderView)>.entry .listField{line-height:1.35}
-#content.archiveItemCatalogue:not(.compactView):not(.detailedGridView):not(.cardBinderView)>.entry .listFieldLabel{color:var(--archive-home-secondary)}
-#content.archiveItemCatalogue:not(.compactView):not(.detailedGridView):not(.cardBinderView)>.entry .listFieldValue{color:var(--archive-home-primary)}
-#content.archiveItemCatalogue.compactView>.entry{min-height:70px;padding:7px 9px;gap:8px}
-#content.archiveItemCatalogue.compactView>.entry .thumb{width:50px;height:66px}
-#content.archiveItemCatalogue.compactView>.entry .cardName{font-size:14px}
-#content.archiveItemCatalogue.compactView>.entry .catalogueLine{font-size:12px;line-height:1.3;color:var(--archive-home-secondary)}
-/* Settings: previews reflect the actual compact image/row and detailed image/field layouts. */
-.catalogueChoices .itemPreviewCompact>i{height:19px}
-.catalogueChoices .itemPreviewCompact b{height:13px;width:10px;border-radius:2px;background:#607589}
-.catalogueChoices .itemPreviewDetailed>b{width:33px;height:60px;background:#607589}
-.catalogueChoices .itemPreviewDetailed>span{gap:5px}
-.catalogueChoices .itemPreviewDetailed>span i:first-child{height:6px;background:#c2cedb}
-@media(max-width:520px){
-  #content.archiveItemCatalogue:not(.detailedGridView):not(.cardBinderView)>.entry{padding:8px;gap:7px}
-  #content.archiveItemCatalogue.compactView>.entry{padding:6px;gap:6px}
-  #content.archiveItemCatalogue.compactView>.entry .thumb{width:46px;height:62px}
-}
-
-/* Archive v0.2.24 — Balanced Minimalist: Detailed Grid and Binder only.
-   Keep the existing two-column / adjustable-column grid definitions and controls. */
-#content.archiveItemCatalogue.detailedGridView>.entry,
-#content.archiveItemCatalogue.cardBinderView>.entry{
-  background:var(--archive-home-surface);
-  border:1px solid var(--archive-home-border);
-  border-radius:8px;
-  box-shadow:none;
-  font-family:'Courier New',Courier,monospace;
-  transition:background-color .15s ease,border-color .15s ease;
-}
-#content.archiveItemCatalogue.detailedGridView>.entry:hover,
-#content.archiveItemCatalogue.cardBinderView>.entry:hover{
-  background:var(--archive-home-surface-hover);
-  border-color:var(--archive-home-secondary);
-}
-#content.archiveItemCatalogue.detailedGridView>.entry:focus-visible,
-#content.archiveItemCatalogue.cardBinderView>.entry:focus-visible{
-  outline:2px solid var(--archive-home-secondary);outline-offset:2px;
-}
-#content.archiveItemCatalogue.detailedGridView>.entry{padding:9px;gap:6px;}
-#content.archiveItemCatalogue.detailedGridView>.entry .gridCardPhoto>.thumb,
-#content.archiveItemCatalogue.cardBinderView>.entry .binderCardPhoto>.thumb{
-  border:1px solid var(--archive-home-border);
-  border-radius:6px;
-  box-sizing:border-box;
-}
-#content.archiveItemCatalogue.detailedGridView>.entry .cardName{
-  color:var(--archive-home-primary);font-weight:700;line-height:1.3;
-  font-family:'Courier New',Courier,monospace;overflow-wrap:anywhere;
-}
-#content.archiveItemCatalogue.detailedGridView>.entry .catalogueLine,
-#content.archiveItemCatalogue.detailedGridView>.entry .catalogueDescription{
-  color:var(--archive-home-secondary);line-height:1.4;
-}
-#content.archiveItemCatalogue.detailedGridView>.entry .catalogueDescription{
-  border-top:1px solid var(--archive-home-border);
-}
-#content.archiveItemCatalogue.cardBinderView>.entry{padding:5px;}
-/* Settings icon previews: show the actual two-up vertical card layout and image-only gallery. */
-.catalogueChoices .itemPreviewGrid{align-items:stretch;}
-.catalogueChoices .itemPreviewGrid>i{height:72px;gap:4px;padding:4px;}
-.catalogueChoices .itemPreviewGrid b{width:100%;height:42px;flex:0 0 42px;background:#607589;border-radius:3px;}
-.catalogueChoices .itemPreviewGrid em{height:3px;width:90%;flex:none;background:#aab9c8;}
-.catalogueChoices .itemPreviewGrid em:last-child{width:58%;}
-.catalogueChoices .itemPreviewBinder{gap:4px;}
-.catalogueChoices .itemPreviewBinder i{height:37px;aspect-ratio:3/4;background:#607589;border-color:#8192a5;}
-@media(max-width:520px){
- #content.archiveItemCatalogue.detailedGridView>.entry{padding:6px;gap:5px;}
- #content.archiveItemCatalogue.cardBinderView>.entry{padding:4px;}
- .catalogueChoices .itemPreviewGrid>i{height:64px;padding:3px;}
- .catalogueChoices .itemPreviewGrid b{height:35px;flex-basis:35px;}
- .catalogueChoices .itemPreviewBinder i{height:29px;}
-}
-
-/* Archive v0.2.26 — Balanced Minimalist Settings only.
-   Every selector is scoped to the Settings modal; no shared catalogue, editor,
-   modal, or global button styles are altered. */
-.archiveSettingsModal{
-  --settings-surface:var(--archive-home-surface);
-  --settings-hover:var(--archive-home-surface-hover);
-  --settings-border:var(--archive-home-border);
-  --settings-primary:var(--archive-home-primary);
-  --settings-secondary:var(--archive-home-secondary);
-  font-family:'Courier New',Courier,monospace;
-}
-.archiveSettingsModal .settingsSection{
-  background:var(--settings-surface);
-  border:1px solid var(--settings-border);
-  border-radius:9px;
-  padding:11px 12px;
-  margin:8px 0;
-}
-.archiveSettingsModal .settingsSection h3{
-  color:var(--settings-primary);
-  font:700 12px/1.3 'Courier New',Courier,monospace;
-  letter-spacing:.6px;
-  margin:0 0 8px;
-}
-.archiveSettingsModal .settingsSection .help{
-  color:var(--settings-secondary);
-  font:11px/1.45 'Courier New',Courier,monospace;
-  margin:8px 0 0;
-}
-.archiveSettingsModal .themePreview,
-.archiveSettingsModal .catalogueChoices .layoutPreview,
-.archiveSettingsModal .settingsNavRow,
-.archiveSettingsModal .backupAction{
-  border:1px solid var(--settings-border);
-  border-radius:8px;
-  background:var(--settings-hover);
-  color:var(--settings-primary);
-  box-shadow:none;
-  transition:border-color .15s ease,background-color .15s ease;
-}
-.archiveSettingsModal .themePreview:hover,
-.archiveSettingsModal .catalogueChoices .layoutPreview:hover,
-.archiveSettingsModal .settingsNavRow:hover,
-.archiveSettingsModal .backupAction:hover{
-  background:var(--settings-surface);
-  border-color:var(--settings-secondary);
-}
-.archiveSettingsModal .themePreview.isSelected,
-.archiveSettingsModal .catalogueChoices .layoutPreview.isSelected{
-  border:2px solid var(--settings-primary)!important;
-  box-shadow:none!important;
-}
-.archiveSettingsModal .themePreview:focus-visible,
-.archiveSettingsModal .catalogueChoices .layoutPreview:focus-visible,
-.archiveSettingsModal .settingsNavRow:focus-visible,
-.archiveSettingsModal .backupAction:focus-visible,
-.archiveSettingsModal .switch:focus-visible,
-.archiveSettingsModal #deleteAll:focus-visible{
-  outline:2px solid var(--settings-secondary);
-  outline-offset:2px;
-}
-.archiveSettingsModal .themePreview{min-height:110px;gap:5px;padding:9px 6px}
-.archiveSettingsModal .themePreview strong{color:var(--settings-primary);font-size:12px}
-.archiveSettingsModal .themePreview small{color:var(--settings-secondary);font-size:10px}
-.archiveSettingsModal .themeMiniWindow{max-width:100%}
-.archiveSettingsModal .settingsChoiceGrid.catalogueChoices{gap:7px}
-.archiveSettingsModal .settingsChoiceGrid.catalogueChoices .layoutPreview{
-  min-height:92px;padding:7px;overflow:hidden;
-}
-.archiveSettingsModal .catalogueChoiceDescription{
-  border-top:1px solid var(--settings-border);
-  margin-top:9px;padding-top:9px;gap:4px;
-}
-.archiveSettingsModal .catalogueDescriptionTitle{color:var(--settings-primary)}
-.archiveSettingsModal .catalogueDescriptionBody{color:var(--settings-secondary)}
-.archiveSettingsModal .settingsNavRow{padding:9px 10px;gap:9px}
-.archiveSettingsModal .settingsNavText strong{font-size:12px}
-.archiveSettingsModal .settingsNavText small,
-.archiveSettingsModal .settingsCount,
-.archiveSettingsModal .settingsChevron{color:var(--settings-secondary)}
-.archiveSettingsModal .backupAction{padding:11px 7px;gap:5px;min-height:91px}
-.archiveSettingsModal .backupAction .backupSymbol{font-size:23px;line-height:1.1}
-.archiveSettingsModal .backupAction strong{font-size:12px}
-.archiveSettingsModal .backupAction small{color:var(--settings-secondary);font-size:10px}
-.archiveSettingsModal .settingsToggleRow{padding:5px 0;min-height:50px;gap:10px}
-.archiveSettingsModal .settingsToggleRow>span{min-width:0;gap:4px}
-.archiveSettingsModal .settingsToggleRow strong{font-size:12px;color:var(--settings-primary)}
-.archiveSettingsModal .switch{flex-shrink:0}
-.archiveSettingsModal .deleteLine{gap:12px}
-.archiveSettingsModal .deleteLine>span{min-width:0;gap:5px}
-.archiveSettingsModal .deleteLine>span>span{color:var(--settings-primary);line-height:1.4}
-.archiveSettingsModal .deleteLine .icon{
-  flex:0 0 40px;width:40px;height:40px;
-  border:1px solid #aa6670;border-radius:8px;
-}
-.archiveSettingsModal .sentenceLine{display:block;margin:0;padding:0}
-@media(max-width:520px){
-  .archiveSettingsModal .settingsSection{padding:9px;margin:7px 0}
-  .archiveSettingsModal .settingsChoiceGrid.catalogueChoices{gap:5px}
-  .archiveSettingsModal .settingsChoiceGrid.catalogueChoices .layoutPreview{padding:5px;min-height:80px}
-  .archiveSettingsModal .backupAction{padding:9px 5px}
-}
-
-/* v0.2.27 — CA-inspired catalogue selector structure, scoped to Settings. */
-.archiveSettingsModal .catalogueChoices.catalogueChoicesTwo{grid-template-columns:repeat(2,minmax(0,1fr));}
-.archiveSettingsModal .catalogueChoices.catalogueChoicesFour{grid-template-columns:repeat(4,minmax(0,1fr));}
-.archiveSettingsModal .catalogueChoices .layoutPreview{min-width:0;min-height:105px;padding:8px;border-radius:10px;}
-.archiveSettingsModal .catalogueChoices .layoutPreview.isSelected{border:3px solid var(--settings-primary)!important;}
-.archiveSettingsModal .catalogueChoiceDescription{display:block;min-height:0;line-height:1.45;overflow:auto;}
-.archiveSettingsModal .catalogueChoiceDescription .catalogueDescriptionTitle{display:block;font-size:13px;font-weight:700;margin:0 0 6px;}
-.archiveSettingsModal .catalogueChoiceDescription .catalogueDescriptionBody{display:block;font-size:11px;color:var(--settings-secondary);overflow-wrap:anywhere;}
-/* The stepper is a true float, not a flex/grid column: prose flows alongside it
-   and can continue at full width below it. DOM order puts it before the title. */
-.archiveSettingsModal .catalogueChoiceDescription:has(.binderColumnStepper) .binderColumnStepper{
-  float:right;display:inline-flex;position:static;clear:right;
-  width:max-content;max-width:100%;margin:0 0 5px 10px;
-  align-items:center;gap:4px;flex-shrink:initial;
-}
-.archiveSettingsModal .catalogueChoiceDescription .binderColumnStepper button,
-.archiveSettingsModal .catalogueChoiceDescription .binderColumnStepper output{
-  width:34px;height:34px;border-radius:7px;font-size:18px;
-}
-.archiveSettingsModal .catalogueChoiceDescription:has(.binderColumnStepper) .catalogueDescriptionTitle,
-.archiveSettingsModal .catalogueChoiceDescription:has(.binderColumnStepper) .catalogueDescriptionBody{
-  display:block;min-width:0;
-}
-@media(max-width:520px){
- .archiveSettingsModal .catalogueChoices .layoutPreview{min-height:83px;padding:4px;}
- .archiveSettingsModal .catalogueChoiceDescription .binderColumnStepper button,
- .archiveSettingsModal .catalogueChoiceDescription .binderColumnStepper output{width:30px;height:32px;font-size:17px;}
- .archiveSettingsModal .catalogueChoiceDescription:has(.binderColumnStepper) .binderColumnStepper{margin-left:7px;}
-}
-
-/* v0.2.27.1 hotfix: ID-level flex rule from v0.1.9.8 was overriding the
-   Settings selector's float layout. Force normal flow and float the stepper. */
-.archiveSettingsModal #layoutDescription.catalogueChoiceDescription:has(.binderColumnStepper){
-  display:flow-root!important;
-  text-align:left;
-  justify-content:normal;
-  align-items:normal;
-  gap:0;
-}
-.archiveSettingsModal #layoutDescription.catalogueChoiceDescription .binderColumnStepper{
-  float:right!important;
-  display:inline-flex;
-  clear:none;
-  margin:0 0 5px 8px;
-}
-.archiveSettingsModal #layoutDescription.catalogueChoiceDescription .catalogueDescriptionTitle,
-.archiveSettingsModal #layoutDescription.catalogueChoiceDescription .catalogueDescriptionBody{
-  text-align:left;
-}
-
-/* v0.2.28 — scoped Add/Edit modal visual design; no form behavior changes. */
-.archiveFormModal{
- --form-surface:var(--archive-home-surface,var(--panel));
- --form-border:var(--archive-home-border,var(--edge));
- --form-primary:var(--archive-home-primary,var(--text));
- --form-secondary:var(--archive-home-secondary,var(--muted));
- background:var(--form-surface);border:1px solid var(--form-border);
- border-radius:12px;font-family:'Courier New',Courier,monospace;
- padding:15px;
-}
-.archiveFormModal h2{font:700 21px/1.3 'Courier New',Courier,monospace;color:var(--form-primary);margin:0 0 11px}
-.archiveFormModal .field{display:block;color:var(--form-secondary);font:12px/1.4 'Courier New',Courier,monospace;margin:9px 0}
-.archiveFormModal .field input:not([type=checkbox]):not([type=radio]),
-.archiveFormModal .field textarea,.archiveFormModal .field select,
-.archiveFormModal #cName,.archiveFormModal #bookTitle{
- border:1px solid var(--form-border);border-radius:8px;
- background:var(--panel);color:var(--form-primary);
- font:13px/1.4 'Courier New',Courier,monospace;
- padding:10px 11px;min-height:41px;width:100%;
-}
-.archiveFormModal .field textarea{min-height:88px;resize:vertical}
-.archiveFormModal .field input:focus-visible,.archiveFormModal .field textarea:focus-visible,
-.archiveFormModal .field select:focus-visible,.archiveFormModal button:focus-visible{
- outline:2px solid var(--form-secondary);outline-offset:1px;
-}
-.archiveFormModal .field input.fieldInvalid,.archiveFormModal .field textarea.fieldInvalid,
-.archiveFormModal .field select.fieldInvalid{border-color:#e06b78!important;outline-color:#e06b78!important}
-.archiveFormModal .fieldError{color:#f38a95;font-size:11px;line-height:1.4}
-.archiveFormModal .additionalToggle{border-radius:8px;border:1px solid var(--form-border);background:var(--panel);color:var(--form-primary);min-height:42px}
-.archiveFormModal #genericAdditionalFields{border-color:var(--form-border);border-radius:8px}
-.archiveFormModal .help{color:var(--form-secondary);font:11px/1.45 'Courier New',Courier,monospace}
-.archiveFormModal .descriptionCounter{color:var(--form-secondary);font-size:10px}
-.archiveFormModal .actions{gap:7px;margin-top:12px}
-.archiveFormModal .actions button{min-width:40px;min-height:40px;border-radius:8px;border:1px solid var(--form-border);background:var(--panel);color:var(--form-primary)}
-.archiveFormModal .actions button:hover{border-color:var(--form-secondary)}
-.archiveFormModal .actions button.danger{border-color:#b96c76;color:#ffb8bf}
-.archiveFormModal .row{gap:8px}
-@media(max-width:520px){.archiveFormModal{padding:12px}.archiveFormModal h2{font-size:20px}.archiveFormModal .row{gap:6px}}
-
-/* v0.2.30: compact universal Date row; placeholders live inside inputs. */
-.unifiedDateRow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0 12px}
-.unifiedDateLabel{font-weight:600;flex:1;min-width:0}
-.unifiedDateRow .dateFields{margin-top:0;flex:0 1 auto;min-width:0}
-.unifiedDateRow .dateFields input{width:52px;max-width:52px;padding:9px 3px}
-.unifiedDateRow .dateFields input:last-child{width:78px;max-width:78px}
-.otherCustomDate .dateFields{margin-top:0}
-.otherCustomDate .dateFields input{width:46px;padding:9px 2px}
-.otherCustomDate .dateFields input:last-child{width:68px}
-.otherCustomRow:has(.otherCustomDate:not([hidden])){grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) auto}
-.otherCustomRow .otherCustomDate[hidden]{display:none!important}
-@media(max-width:420px){.unifiedDateRow{gap:5px}.unifiedDateRow .dateFields{gap:4px}.unifiedDateRow .dateFields input{width:46px;max-width:46px}.unifiedDateRow .dateFields input:last-child{width:70px;max-width:70px}.otherCustomRow:has(.otherCustomDate:not([hidden])){grid-template-columns:minmax(0,1fr) minmax(0,1.7fr) auto}.otherCustomDate .dateFields{gap:2px}.otherCustomDate .dateFields input{width:38px}.otherCustomDate .dateFields input:last-child{width:58px}}
-
-/* Date validation messages occupy a full line beneath the three inputs. */
-.dateFields{flex-wrap:wrap}
-.dateFields .fieldError{flex-basis:100%;width:100%;order:4;margin:1px 0 0;text-align:left}
-
-/* v0.2.34: Item detail's lone Edit action remains right-aligned after removing redundant context text. */
-.catalogueMeta #context.subhead:has(> #editCard){justify-content:flex-end}
+/* v0.4.8 hotfix: grid descriptions and image-overlay tags */
+#content.detailedGridView .entry .catalogueDescription{border-top:1px solid rgba(148,163,184,.18);padding-top:6px;margin:6px 0 0;line-height:1.4}
+#content.detailedGridView .entry .gridCardMeta{margin-bottom:0}
+#content.detailedGridView .gridCardPhoto .gridPhotoTags{position:absolute;right:7px;bottom:46px;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;width:32px;max-height:calc(100% - 54px);overflow:hidden;line-height:1;background:transparent;border:0;padding:0;pointer-events:none}
+#content.detailedGridView .gridCardPhoto .gridPhotoTags small{font-size:22px;line-height:1.15;display:block;max-width:100%;text-align:center}
+@media(max-width:520px){#content.detailedGridView .gridCardPhoto .gridPhotoTags{right:5px;bottom:40px;width:29px;max-height:calc(100% - 47px)}#content.detailedGridView .gridCardPhoto .gridPhotoTags small{font-size:20px}}
