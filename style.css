@@ -384,3 +384,7 @@ button.danger:hover, #deleteAll:hover, #bulkDelete:hover{background:#4a292e}
 #content.cardBinderView .binderCardPhoto .thumb.placeholder{display:grid;place-items:center;line-height:1.3}
 #content.cardBinderView .entry>input[type=checkbox]{position:absolute;top:7px;left:7px;z-index:2}
 @media(max-width:520px){.catalogueChoices.fourChoices{gap:4px}.binderCardPreview{gap:2px}.binderChoiceBottom{gap:6px}.binderColumnStepper{gap:3px}.binderColumnStepper button,.binderColumnStepper output{width:44px;height:48px;font-size:22px}#content.cardBinderView{gap:5px}#content.cardBinderView .entry{padding:3px}}
+
+/* v0.4.7: Default binder view favorites counter; preserve existing grid and tile sizing. */
+#content:not(.binderCompactView) .binderDefaultCounts{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;}
+#content:not(.binderCompactView) .binderDefaultCounts small{white-space:nowrap;}
