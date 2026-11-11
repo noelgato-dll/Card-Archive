@@ -63,7 +63,7 @@ function caMutationDetails(message){const m=pendingHistoryMutation;pendingHistor
  return {message,target:null};
 }
 function caTargetExists(t){return !!(t&&((t.type==='card'&&db.cards.some(c=>c.id===t.id))||(t.type==='binder'&&db.binders.some(b=>b.id===t.id))))}
-function caHistoryMarkup(){return caHistory.length?caHistory.map(e=>{const link=e.successful&&caTargetExists(e.target);const when=new Date(e.timestamp);const date=Number.isNaN(when.getTime())?'Unknown date':when.toLocaleString();
+function caHistoryMarkup(){return caHistory.length?caHistory.map(e=>{const link=e.successful&&caTargetExists(e.target);const when=new Date(e.timestamp);const date=Number.isNaN(when.getTime())?'Unknown date':when.toLocaleString(undefined,{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false,hourCycle:'h23'});
  // Escape before emphasizing verbs to prevent stored strings from becoming HTML.
  const message=esc(e.message).replace(/\b(added|updated|deleted|moved|created|renamed|copied|saved|restored|failed|removed)\b/gi,'<strong>$1</strong>');
  return `<${link?'button type="button"':'div'} class="caHistoryEntry ${e.successful?'caHistorySuccess':'caHistoryFailure'}" ${link?`data-ca-history="${esc(e.id)}" title="Open record"`:''}><span class="caHistoryIndicator">${e.successful?'✓':'✕'}</span><span class="caHistoryBody"><span>${message}</span><small>${esc(date)}${e.target&&!link?' · Destination unavailable':''}</small></span></${link?'button':'div'}>`}).join(''):'<p class="caHistoryEmpty">No notifications yet.</p>'}
