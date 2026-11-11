@@ -1052,3 +1052,15 @@ button.danger:hover, #deleteAll:hover, #bulkDelete:hover{background:#4a292e}
 .whatsNewReleaseHeader{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .whatsNewReleaseHeader time{font-size:12px;font-weight:bold;white-space:nowrap;color:var(--text)}
 @media(max-width:380px){.whatsNewReleaseHeader time{font-size:11px}}
+
+/* CA v0.4.10 development — notification history, scoped to Settings. */
+.settingsTitleBar{position:relative;height:0;display:flex;justify-content:flex-end;z-index:1}
+.settingsTitleBar .whatsNewToggle{position:absolute;top:-32px;right:0}
+.settingsTitleBar .caNotificationToggle{right:41px}
+.caHistoryPanel{max-height:310px;overflow-y:auto}
+.caHistoryEntry{display:flex;align-items:flex-start;gap:9px;width:100%;padding:10px 5px;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--edge);color:inherit;font:12px/1.5 'Courier New',monospace}
+button.caHistoryEntry{cursor:pointer}button.caHistoryEntry:hover{background:var(--panel)}
+.caHistoryIndicator{font-weight:bold;flex:0 0 14px}
+.caHistoryBody{flex:1;min-width:0;overflow-wrap:anywhere}.caHistoryBody small{display:block;color:var(--muted);margin-top:3px}
+.caHistorySuccess .caHistoryIndicator{color:#39b779}.caHistoryFailure .caHistoryIndicator{color:#d95858}
+.caHistoryEmpty{color:var(--muted);font-size:12px;padding:10px 0}
