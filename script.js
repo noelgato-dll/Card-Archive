@@ -31,7 +31,12 @@ function applyTheme(){
 applyTheme();
 function save(next){const json=JSON.stringify(next);localStorage.setItem(KEY,json);pendingHistoryMutation={before:db,after:next};db=next;render()}
 function update(fn){const next=structuredClone(db);fn(next);save(next)}
-function formatStatus(el,message,error=false){if(!el)return;el.replaceChildren();el.className=error?'error':'';const action=/\b(added|updated|deleted|moved|tagged|untagged|removed|enabled|disabled|restored|exported|imported|merged|favorited|unfavorited|failed|saved|cancelled)\b/gi;let pos=0,match;while((match=action.exec(message))){if(match.index>pos)el.append(document.createTextNode(message.slice(pos,match.index)));const strong=document.createElement('strong');strong.textContent=match[0];el.append(strong);pos=action.lastIndex}if(pos<message.length)el.append(document.createTextNode(message.slice(pos)))}
+// Display-only punctuation preserves older stored history entries unchanged.
+function notificationSentence(message){const value=String(message??'').trim();return value&&!/[.!?]$/.test(value)?value+'.':value}
+const notificationAction=/\b(added|updated|edited|deleted|moved|tagged|untagged|removed|enabled|disabled|restored|exported|imported|merged|favorited|unfavorited|failed|saved|cancelled|created|renamed|copied|cleared)\b/gi;
+const destructiveAction=/^(deleted|removed|disabled|cleared)$/i;
+function notificationMarkup(message){const value=notificationSentence(message);let out='',pos=0,match;notificationAction.lastIndex=0;while((match=notificationAction.exec(value))){out+=esc(value.slice(pos,match.index));out+=`<strong${destructiveAction.test(match[0])?' class="notificationDestructive"':''}>${esc(match[0])}</strong>`;pos=notificationAction.lastIndex}return out+esc(value.slice(pos))}
+function formatStatus(el,message,error=false){if(!el)return;el.className=error?'error':'';el.innerHTML=notificationMarkup(message)}
 function status(message,error=false){formatStatus($('status'),message,error);formatStatus($('settingsStatus'),message,error)}
 function clearStatus(){status('')}
 // v0.4.10: notification history is independent of the card archive backup.
@@ -63,15 +68,15 @@ function caMutationDetails(message){const m=pendingHistoryMutation;pendingHistor
  return {message,target:null};
 }
 function caTargetExists(t){return !!(t&&((t.type==='card'&&db.cards.some(c=>c.id===t.id))||(t.type==='binder'&&db.binders.some(b=>b.id===t.id))))}
-function caHistoryMarkup(){return caHistory.length?caHistory.map(e=>{const link=e.successful&&caTargetExists(e.target);const when=new Date(e.timestamp);const date=Number.isNaN(when.getTime())?'Unknown date':when.toLocaleString(undefined,{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false,hourCycle:'h23'});
+function caHistoryMarkup(){return caHistory.length?caHistory.map(e=>{const link=e.successful&&caTargetExists(e.target);const when=new Date(e.timestamp);const date=Number.isNaN(when.getTime())?'Unknown date':`${String(when.getDate()).padStart(2,'0')}-${String(when.getMonth()+1).padStart(2,'0')}-${when.getFullYear()} / ${String(when.getHours()).padStart(2,'0')}:${String(when.getMinutes()).padStart(2,'0')}:${String(when.getSeconds()).padStart(2,'0')}`;
  // Escape before emphasizing verbs to prevent stored strings from becoming HTML.
- const message=esc(e.message).replace(/\b(added|updated|deleted|moved|created|renamed|copied|saved|restored|failed|removed)\b/gi,'<strong>$1</strong>');
+ const message=notificationMarkup(e.message);
  return `<${link?'button type="button"':'div'} class="caHistoryEntry ${e.successful?'caHistorySuccess':'caHistoryFailure'}" ${link?`data-ca-history="${esc(e.id)}" title="Open record"`:''}><span class="caHistoryIndicator">${e.successful?'✓':'✕'}</span><span class="caHistoryBody"><span>${message}</span><small>${esc(date)}${e.target&&!link?' · Destination unavailable':''}</small></span></${link?'button':'div'}>`}).join(''):'<p class="caHistoryEmpty">No notifications yet.</p>'}
 function openCAHistoryTarget(t){if(!caTargetExists(t))return;closeModal();view={binder:t.type==='binder'?t.id:db.cards.find(c=>c.id===t.id).binderId,card:t.type==='card'?t.id:null,search:false};words=[];filters=[];draft='';editMode=false;selected.clear();render()}
 function recordCAHistory(msg,error){if(!msg||!String(msg).trim())return;
  const details=error?{message:msg,target:null}:caMutationDetails(msg);
  if(error)pendingHistoryMutation=null;
- const entry={id:uid(),message:details.message,timestamp:new Date().toISOString(),successful:!error,target:error?null:details.target};
+ const entry={id:uid(),message:notificationSentence(details.message),timestamp:new Date().toISOString(),successful:!error,target:error?null:details.target};
  const next=[entry,...caHistory].slice(0,CA_HISTORY_LIMIT);
  try{localStorage.setItem(CA_HISTORY_KEY,JSON.stringify(next));caHistory=next}catch(_){/* A storage error must not affect the user action. */}
 }

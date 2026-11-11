@@ -1064,3 +1064,11 @@ button.caHistoryEntry{cursor:pointer}button.caHistoryEntry:hover{background:var(
 .caHistoryBody{flex:1;min-width:0;overflow-wrap:anywhere}.caHistoryBody small{display:block;color:var(--muted);margin-top:3px}
 .caHistorySuccess .caHistoryIndicator{color:#39b779}.caHistoryFailure .caHistoryIndicator{color:#d95858}
 .caHistoryEmpty{color:var(--muted);font-size:12px;padding:10px 0}
+
+/* v0.4.10 notification wording: successful messages remain green; destructive verbs are red. */
+#status strong.notificationDestructive,.settingsStatus strong.notificationDestructive,.caHistoryBody strong.notificationDestructive{color:#e65b65;font-weight:700}
+.caHistorySuccess .caHistoryBody>span{color:#39b779}
+.caHistoryFailure .caHistoryBody>span{color:#d95858}
+:root[data-theme="light"] #status strong.notificationDestructive,:root[data-theme="light"] .settingsStatus strong.notificationDestructive,:root[data-theme="light"] .caHistoryBody strong.notificationDestructive{color:#ba2438}
+:root[data-theme="light"] .caHistorySuccess .caHistoryBody>span{color:#23643d}
+:root[data-theme="light"] .caHistoryFailure .caHistoryBody>span{color:#ad1e35}
