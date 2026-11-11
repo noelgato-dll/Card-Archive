@@ -1072,3 +1072,14 @@ button.caHistoryEntry{cursor:pointer}button.caHistoryEntry:hover{background:var(
 :root[data-theme="light"] #status strong.notificationDestructive,:root[data-theme="light"] .settingsStatus strong.notificationDestructive,:root[data-theme="light"] .caHistoryBody strong.notificationDestructive{color:#ba2438}
 :root[data-theme="light"] .caHistorySuccess .caHistoryBody>span{color:#23643d}
 :root[data-theme="light"] .caHistoryFailure .caHistoryBody>span{color:#ad1e35}
+
+/* v0.4.10 What's New: semantic bold action prefixes, scoped to release notes. */
+.whatsNewRelease li strong{font-weight:700}
+.whatsNewRelease .changeAdded{color:#16a34a}
+.whatsNewRelease .changeImproved{color:#166534}
+.whatsNewRelease .changeFixed{color:#f97316}
+.whatsNewRelease .changeUpdated{color:#3b82f6}
+.whatsNewRelease .changeRemoved{color:#ef4444}
+/* Keep dark green legible on dark backgrounds. */
+:root:not([data-theme="light"]) .whatsNewRelease .changeImproved{color:#4ade80}
+#status .notificationBracket,.settingsStatus .notificationBracket,.caHistoryBody .notificationBracket{font-weight:700}
