@@ -411,3 +411,625 @@ button.danger:hover, #deleteAll:hover, #bulkDelete:hover{background:#4a292e}
 #content.detailedGridView .gridCardPhoto .gridPhotoTags{position:absolute;right:7px;bottom:46px;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;width:32px;max-height:calc(100% - 54px);overflow:hidden;line-height:1;background:transparent;border:0;padding:0;pointer-events:none}
 #content.detailedGridView .gridCardPhoto .gridPhotoTags small{font-size:22px;line-height:1.15;display:block;max-width:100%;text-align:center}
 @media(max-width:520px){#content.detailedGridView .gridCardPhoto .gridPhotoTags{right:5px;bottom:40px;width:29px;max-height:calc(100% - 47px)}#content.detailedGridView .gridCardPhoto .gridPhotoTags small{font-size:20px}}
+
+/* CA color scheme controls and scoped theme palette */
+.colorSchemePanel{border-top:1px solid var(--edge);margin-top:9px;padding-top:9px}
+.colorSchemeGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.colorSchemeOption{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;padding:7px 4px;background:var(--panel);border:1px solid var(--edge);font:12px 'Courier New',monospace}
+.colorSchemeOption strong{font-size:11px;overflow-wrap:anywhere}
+.colorSchemeOption.isSelected{border:2px solid var(--text)}
+.colorSchemeSwatch{display:block;width:100%;height:33px;border-radius:5px;background:var(--swatch)}
+:root:not([data-color-scheme="default"]) .primary{background:var(--scheme-accent);color:var(--scheme-ink)}
+:root[data-theme="light"]:not([data-color-scheme="default"]) button.primary{background:var(--scheme-accent);color:#fff}
+:root:not([data-color-scheme="default"]) .tag.active{border-color:var(--scheme-accent)}
+:root:not([data-color-scheme="default"]) .themePreview.isSelected,
+:root:not([data-color-scheme="default"]) .catalogueOption.isSelected{border-color:var(--scheme-accent)!important}
+:root:not([data-color-scheme="default"]) button:focus-visible,
+:root:not([data-color-scheme="default"]) input:focus-visible,
+:root:not([data-color-scheme="default"]) select:focus-visible{outline-color:var(--scheme-accent)}
+:root:not([data-color-scheme="default"]) .colorSchemeOption.isSelected{border-color:var(--scheme-accent)}
+@media(max-width:420px){.settingsSection .themePreview{min-height:100px;padding:6px 3px}.themeMiniWindow{width:95%;height:45px;padding:6px}.settingsSection .themePreview small{font-size:9px}}
+
+
+/* v0.3.2 — coordinated palettes. Scoped to non-default presets to preserve original design. */
+:root:not([data-color-scheme="default"]) body{background:var(--bg);color:var(--text)}
+:root:not([data-color-scheme="default"]) .toolbar{background:var(--bg)}
+:root:not([data-color-scheme="default"]) :is(.binder,.entry,.panel,.modal,.settingsSection,.menu,.bulk,.listRow,.copyBadge,.duplicateCount,.binderNameBadge,.detailTag,.settingsNavRow,.backupAction,.layoutPreview,.catalogueOption,.colorSchemeOption,.dateFields input,.cropbox){background-color:var(--panel);border-color:var(--edge);color:var(--text)}
+:root:not([data-color-scheme="default"]) :is(.modalShade .modal,.archiveSettingsModal,.archiveSettingsModal .settingsSection,.archiveSettingsModal .settingsNavRow,.archiveSettingsModal .backupAction,.archiveSettingsModal .layoutPreview,.archiveSettingsModal .themePreview){background-color:var(--panel);border-color:var(--edge);color:var(--text)}
+:root:not([data-color-scheme="default"]) :is(input,textarea,select,button:not(.primary):not(.danger),.entry .thumb,.imageMissing,.tag,.chip,.copyBadge,.duplicateCount){background-color:var(--scheme-raised);border-color:var(--edge);color:var(--text)}
+:root:not([data-color-scheme="default"]) :is(.tag.active,.chip.active,.layoutPreview.isSelected,.catalogueOption.isSelected,.colorSchemeOption.isSelected,.themePreview.isSelected){background-color:var(--scheme-soft);border-color:var(--scheme-accent);color:var(--text)}
+:root:not([data-color-scheme="default"]) :is(.menu,.bulk,.modal .actions,.settingsSection,.settingsNavRow,.backupAction){background-color:var(--panel);border-color:var(--edge)}
+:root:not([data-color-scheme="default"]) :is(.modal .actions,.modalShade .actions){background-color:var(--panel)}
+:root:not([data-color-scheme="default"]) :is(.field,.help,.subhead,.catalogueDescription,.copyDescription,.entry .details div,.entry .details small,.detailMeta,.binder small,.binderCounter,.copyrightFooter,.connectionStatus,#offlineInfo.connectionStatus,header small,.developerLink,.settingsSection label,.settingLine){color:var(--muted)}
+:root:not([data-color-scheme="default"]) :is(.settingsSection h3,.archiveSettingsModal .settingsSection h3,.detailTitle,.shelfTileName,.binder strong,.entry strong){color:var(--text)}
+:root:not([data-color-scheme="default"]) :is(.favoriteButton,.catalogueMeta .icon,.toolbar .icon:not(.primary)){color:var(--text)}
+:root:not([data-color-scheme="default"]) :is(button.primary,.primary){background:var(--scheme-accent);border-color:var(--scheme-accent);color:var(--scheme-ink)}
+:root:not([data-color-scheme="default"]) :is(button:not(.danger):not(.primary):hover,.settingsNavRow:hover,.backupAction:hover){border-color:var(--scheme-accent)}
+:root:not([data-color-scheme="default"]) :is(.settingsSection input[type=radio],input[type=checkbox]){accent-color:var(--scheme-accent)}
+:root:not([data-color-scheme="default"]) :is(.themePreview.isSelected,.layoutPreview.isSelected,.catalogueOption.isSelected){box-shadow:inset 0 0 0 1px var(--scheme-accent)}
+/* Preserve distinct error/destructive colors and the neutral image viewer overlay. */
+:root:not([data-color-scheme="default"]) :is(button.danger,.actions button.danger,#deleteAll,#bulkDelete,[data-del-tag],[data-del-binder],[data-delete],[id^="delete"]){color:#ffaaa9;border-color:#a94c4c;background:#3a2428}
+:root[data-theme="light"]:not([data-color-scheme="default"]) :is(button.danger,.actions button.danger,#deleteAll,#bulkDelete,[data-del-tag],[data-del-binder],[data-delete],[id^="delete"]){color:#a21c35;border-color:#b94255;background:#fff0f2}
+:root:not([data-color-scheme="default"]) .viewer{background:#080a0d}
+
+/* v0.3.3 — Home tiles: illustrated vertical catalogue cards.
+   Collection/Group tiles inherit the former compact horizontal Home design.
+   All rules are route-scoped; no change to item catalogue or compact modes. */
+#content.homePageTiles:not(.compactListing)>.grid{
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
+  align-items:stretch!important;
+  gap:10px!important;
+}
+#content.homePageTiles:not(.compactListing)>.grid>.binder{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  text-align:center!important;
+  aspect-ratio:0.78;
+  min-height:230px!important;
+  padding:16px!important;
+  gap:0!important;
+  border-radius:16px;
+  overflow:hidden;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileIcon{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:1 1 35%!important;
+  min-height:60px;
+  width:100%;
+  font-size:clamp(40px,7vw,76px)!important;
+  line-height:1.1;
+  margin:0!important;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileInfo{
+  display:flex!important;
+  flex:1 1 55%!important;
+  width:100%;
+  min-width:0;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  gap:4px!important;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileName{
+  display:block!important;
+  font-size:clamp(16px,2.5vw,23px)!important;
+  line-height:1.2!important;
+  overflow-wrap:anywhere;
+  max-width:100%;
+}
+#content.homePageTiles:not(.compactListing) .shelfTypeLabel{
+  display:block;
+  font-size:clamp(12px,1.8vw,17px)!important;
+  line-height:1.25;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileInfo>small{
+  display:block;
+  align-self:stretch;
+  text-align:left;
+  margin-top:auto;
+  padding-top:14px;
+  font-size:clamp(12px,1.7vw,16px)!important;
+  line-height:1.5;
+}
+#content.groupPageTiles:not(.groupCompactTiles)>.grid>.groupTile{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  text-align:left!important;
+  width:100%;
+  min-height:82px!important;
+  height:auto!important;
+  padding:11px!important;
+  gap:9px!important;
+  border-radius:8px;
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupTileEmoji{
+  flex:0 0 32px!important;
+  font-size:28px!important;
+  line-height:1.1;
+  text-align:center;
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupTileText{
+  display:flex;
+  flex:1 1 auto;
+  min-width:0;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:3px;
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupTileName{
+  font-size:15px;
+  text-align:left;
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupTileCounts{
+  width:auto!important;
+  flex:0 0 auto;
+  margin:0 0 0 auto!important;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:center;
+  gap:3px;
+}
+@media(max-width:520px){
+  #content.homePageTiles:not(.compactListing)>.grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px!important;
+  }
+  #content.homePageTiles:not(.compactListing)>.grid>.binder{
+    min-height:200px!important;
+    padding:10px!important;
+    border-radius:12px;
+  }
+  #content.homePageTiles:not(.compactListing) .shelfTileIcon{font-size:44px!important;min-height:45px}
+  #content.homePageTiles:not(.compactListing) .shelfTileName{font-size:15px!important}
+  #content.homePageTiles:not(.compactListing) .shelfTypeLabel{font-size:12px!important}
+  #content.homePageTiles:not(.compactListing) .shelfTileInfo>small{font-size:11px!important;padding-top:8px}
+  #content.groupPageTiles:not(.groupCompactTiles)>.grid>.groupTile{
+    padding:9px!important;
+    min-height:76px!important;
+    gap:7px!important;
+  }
+  #content.groupPageTiles:not(.groupCompactTiles) .groupTileEmoji{flex-basis:27px!important;font-size:25px!important}
+  #content.groupPageTiles:not(.groupCompactTiles) .groupTileName{font-size:13px}
+  #content.groupPageTiles:not(.groupCompactTiles) .groupTileCounts small{font-size:10px}
+}
+
+/* v0.3.4 — home default tile hierarchy and counter order */
+#content.homePageTiles:not(.compactListing) .shelfTileInfo{
+  justify-content:flex-start!important;
+  gap:0!important;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileName{
+  margin-top:12px!important;
+}
+#content.homePageTiles:not(.compactListing) .shelfTypeLabel{
+  margin-top:2px!important;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileCounts{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:flex-end!important;
+  gap:2px!important;
+  margin-top:auto!important;
+  padding-top:12px!important;
+  width:100%;
+  text-align:left!important;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileFavoriteCount,
+#content.homePageTiles:not(.compactListing) .shelfTileItemCount{
+  display:block;
+  width:100%;
+}
+/* Compact List keeps the old inline counter presentation. */
+#content.homePageTiles.compactListing .shelfTileCounts{
+  display:inline;
+}
+#content.homePageTiles.compactListing .shelfTileFavoriteCount::after{content:' · ';}
+#content.homePageTiles.compactListing .shelfTileItemCount,
+#content.homePageTiles.compactListing .shelfTileFavoriteCount{display:inline;}
+@media(max-width:520px){
+ #content.homePageTiles:not(.compactListing) .shelfTileName{margin-top:8px!important}
+ #content.homePageTiles:not(.compactListing) .shelfTileCounts{padding-top:8px!important}
+}
+
+/* v0.3.5: image-led Home collection cards, inspired by supplied reference.
+   Respect Archive's palette variables and preserve Compact List. */
+#content.homePageTiles:not(.compactListing)>.grid{
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))!important;
+  gap:16px!important;
+}
+#content.homePageTiles:not(.compactListing)>.grid>.binder{
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-start!important;
+  align-items:stretch!important;
+  aspect-ratio:auto!important;
+  min-height:0!important;
+  padding:0!important;
+  gap:0!important;
+  border-radius:13px!important;
+  overflow:hidden!important;
+  text-align:left!important;
+}
+#content.homePageTiles:not(.compactListing) .shelfTilePreview{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:145px;
+  flex:0 0 145px;
+  overflow:hidden;
+  background:color-mix(in srgb,var(--panel, #182336) 82%,var(--accent,#7189ad) 18%);
+  border-bottom:1px solid var(--border,#344257);
+}
+#content.homePageTiles:not(.compactListing) .shelfTilePreview .shelfTileIcon{
+  display:flex!important;
+  flex:none!important;
+  align-items:center;
+  justify-content:center;
+  font-size:52px!important;
+  min-height:0!important;
+  width:auto!important;
+  margin:0!important;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileCornerIcon{
+  position:absolute;
+  top:9px;
+  right:9px;
+  z-index:5;
+  border:1px solid var(--border,#344257);
+  border-radius:6px;
+  background:var(--panel,#182336);
+  padding:3px 5px;
+  font-size:13px;
+  line-height:1.2;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileStack{
+  position:relative;
+  display:block;
+  width:84px;
+  height:96px;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileThumb{
+  position:absolute;
+  inset:0;
+  width:84px;
+  height:96px;
+  object-fit:cover;
+  border-radius:7px;
+  border:1px solid var(--border,#344257);
+  box-shadow:0 3px 12px #0004;
+  transform:rotate(var(--stack-rotation)) translateY(var(--stack-shift));
+  z-index:var(--stack-index);
+}
+#content.homePageTiles:not(.compactListing) .shelfTileInfo{
+  display:flex!important;
+  flex:1 1 auto!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:space-between!important;
+  gap:0!important;
+  width:100%;
+  padding:11px!important;
+  text-align:left!important;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileHeading{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:5px;
+  min-width:0;
+  padding-bottom:11px;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileName{
+  margin:0!important;
+  font-size:14px!important;
+  line-height:1.25!important;
+  text-align:left!important;
+  overflow-wrap:anywhere;
+}
+#content.homePageTiles:not(.compactListing) .shelfTypeLabel{
+  display:inline-flex!important;
+  width:auto!important;
+  max-width:100%;
+  border:1px solid currentColor;
+  border-radius:999px;
+  padding:2px 7px;
+  font-size:10px!important;
+  line-height:1.3!important;
+  font-weight:bold;
+  color:#e6a347;
+  background:color-mix(in srgb,currentColor 10%,transparent);
+}
+#content.homePageTiles:not(.compactListing) [data-collection-type="card"],
+#content.homePageTiles:not(.compactListing) [data-collection-type="cards"]{color:#b68bfa}
+#content.homePageTiles:not(.compactListing) [data-collection-type="diecast"],
+#content.homePageTiles:not(.compactListing) [data-collection-type="diecasts"]{color:#ee7299}
+#content.homePageTiles:not(.compactListing) [data-collection-type="plant"],
+#content.homePageTiles:not(.compactListing) [data-collection-type="plants"]{color:#51c998}
+#content.homePageTiles:not(.compactListing) [data-collection-type="book"],
+#content.homePageTiles:not(.compactListing) [data-collection-type="books"]{color:#6eb8f1}
+#content.homePageTiles:not(.compactListing) [data-collection-type="figure"],
+#content.homePageTiles:not(.compactListing) [data-collection-type="figures"]{color:#e5ad66}
+#content.homePageTiles:not(.compactListing) .shelfTileCounts{
+  display:flex!important;
+  flex-direction:row!important;
+  justify-content:space-between!important;
+  align-items:center!important;
+  gap:8px!important;
+  margin:0!important;
+  padding:10px 0 0!important;
+  width:100%;
+  border-top:1px solid var(--border,#344257);
+  font-size:11px!important;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileItemCount,
+#content.homePageTiles:not(.compactListing) .shelfTileFavoriteCount,
+#content.groupPageTiles:not(.groupCompactTiles) .groupTileCounts small{
+  display:inline-flex!important;
+  width:auto!important;
+  align-items:center;
+  border:1px solid var(--border,#344257);
+  border-radius:6px;
+  padding:3px 7px;
+  font-size:11px!important;
+  line-height:1.25;
+  white-space:nowrap;
+  background:var(--panel,#182336);
+  color:var(--muted,#b2bccb);
+}
+#content.homePageTiles:not(.compactListing) .shelfTileItemCount{order:0}
+#content.homePageTiles:not(.compactListing) .shelfTileFavoriteCount{order:1;margin-left:auto}
+#content.homePageTiles:not(.compactListing) .shelfTileFavoriteCount.hasFavorites,
+#content.groupPageTiles .groupFavoriteBadge.hasFavorites{
+  color:#ff5477!important;
+  border-color:color-mix(in srgb,#ff5477 36%,transparent)!important;
+  background:color-mix(in srgb,#ff5477 11%,transparent)!important;
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupTileCounts{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  width:100%!important;
+  margin-top:8px!important;
+  padding-top:8px;
+  border-top:1px solid var(--border,#344257);
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupTileCounts .groupFavoriteBadge{margin-left:auto}
+@media(max-width:520px){
+ #content.homePageTiles:not(.compactListing)>.grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ #content.homePageTiles:not(.compactListing) .shelfTilePreview{height:105px;flex-basis:105px}
+ #content.homePageTiles:not(.compactListing) .shelfTileInfo{padding:8px!important}
+ #content.homePageTiles:not(.compactListing) .shelfTileName{font-size:12px!important}
+ #content.homePageTiles:not(.compactListing) .shelfTileCounts{gap:4px!important}
+ #content.homePageTiles:not(.compactListing) .shelfTileItemCount,
+ #content.homePageTiles:not(.compactListing) .shelfTileFavoriteCount{font-size:9px!important;padding:3px 4px}
+ #content.homePageTiles:not(.compactListing) .shelfTileStack{transform:scale(.78)}
+}
+
+/* v0.3.6 — Collection page Group cards, scoped to Default catalogue mode. */
+#content.groupPageTiles:not(.groupCompactTiles) > .grid{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))!important;
+  gap:16px!important;
+  align-items:stretch!important;
+}
+#content.groupPageTiles:not(.groupCompactTiles) > .grid > .groupTile{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  text-align:left!important;
+  min-width:0!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:auto!important;
+  padding:0!important;
+  gap:0!important;
+  border-radius:13px!important;
+  overflow:hidden!important;
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardPreview{
+  position:relative;
+  display:flex;
+  flex:0 0 145px;
+  align-items:center;
+  justify-content:center;
+  height:145px;
+  width:100%;
+  overflow:hidden;
+  border-bottom:1px solid var(--border,#344257);
+  background:color-mix(in srgb,var(--panel,#182336) 82%,var(--accent,#7189ad) 18%);
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardTypeIcon{
+  position:absolute;right:9px;top:9px;z-index:5;
+  padding:3px 5px;
+  border:1px solid var(--border,#344257);
+  border-radius:6px;
+  background:var(--panel,#182336);
+  font-size:13px;
+  line-height:1.2;
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardEmoji{
+  display:block;
+  flex:none;
+  width:auto;
+  max-width:100%;
+  font-size:52px;
+  line-height:1.2;
+  text-align:center;
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardStack{position:relative;display:block;width:84px;height:96px}
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardThumb{
+  position:absolute;inset:0;width:84px;height:96px;
+  object-fit:cover;border-radius:7px;
+  border:1px solid var(--border,#344257);
+  box-shadow:0 3px 12px #0004;
+  transform:rotate(var(--stack-rotation)) translateY(var(--stack-shift));
+  z-index:var(--stack-index);
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardBody{
+  display:flex!important;
+  flex:1 1 auto!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:space-between!important;
+  gap:0!important;
+  width:100%!important;
+  min-width:0!important;
+  padding:11px!important;
+  text-align:left!important;
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardHeading{
+  display:block;width:100%;min-width:0;padding-bottom:11px;
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardName{
+  display:block!important;width:100%!important;min-width:0!important;
+  font-size:14px!important;line-height:1.25!important;
+  overflow-wrap:break-word!important;word-break:normal!important;
+  white-space:normal!important;text-align:left!important;
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardFooter{
+  display:flex!important;flex-direction:row!important;
+  align-items:center!important;justify-content:space-between!important;
+  gap:8px!important;width:100%!important;min-width:0!important;
+  padding-top:10px;border-top:1px solid var(--border,#344257);
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardCount,
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardFavorites{
+  display:inline-flex;align-items:center;flex:0 0 auto;
+  border:1px solid var(--border,#344257);border-radius:6px;
+  padding:3px 7px;
+  font-size:11px;line-height:1.25;white-space:nowrap;
+  background:var(--panel,#182336);color:var(--muted,#b2bccb);
+}
+#content.groupPageTiles:not(.groupCompactTiles) .groupCardFavorites.hasFavorites{
+  color:#ff5477!important;
+  border-color:color-mix(in srgb,#ff5477 36%,transparent)!important;
+  background:color-mix(in srgb,#ff5477 11%,transparent)!important;
+}
+@media(max-width:520px){
+ #content.groupPageTiles:not(.groupCompactTiles) > .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ #content.groupPageTiles:not(.groupCompactTiles) .groupCardPreview{height:105px;flex-basis:105px}
+ #content.groupPageTiles:not(.groupCompactTiles) .groupCardBody{padding:8px!important}
+ #content.groupPageTiles:not(.groupCompactTiles) .groupCardName{font-size:12px!important}
+ #content.groupPageTiles:not(.groupCompactTiles) .groupCardCount,
+ #content.groupPageTiles:not(.groupCompactTiles) .groupCardFavorites{font-size:9px!important;padding:3px 4px}
+ #content.groupPageTiles:not(.groupCompactTiles) .groupCardStack{transform:scale(.78)}
+}
+
+/* v0.3.7: keep both Compact List layouts strictly isolated from image-card styling. */
+#content.homePageTiles.compactListing .shelfTilePreview,
+#content.homePageTiles.compactListing .shelfTileStack,
+#content.homePageTiles.compactListing .shelfTileCornerIcon{display:none!important}
+#content.homePageTiles.compactListing>.grid>.binder{
+ display:flex!important;flex-direction:row!important;align-items:center!important;
+ justify-content:flex-start!important;min-height:48px!important;height:auto!important;
+ aspect-ratio:auto!important;padding:9px 11px!important;gap:9px!important;
+ text-align:left!important;overflow:hidden!important;
+}
+#content.homePageTiles.compactListing .shelfTileIcon{
+ display:block!important;flex:0 0 auto!important;min-width:0!important;
+ font-size:18px!important;width:auto!important;height:auto!important;min-height:0!important;
+}
+#content.homePageTiles.compactListing .shelfTileInfo{
+ display:flex!important;flex:1 1 auto!important;min-width:0!important;
+ flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+ padding:0!important;margin:0!important;gap:2px!important;text-align:left!important;
+}
+#content.homePageTiles.compactListing .shelfTileName{
+ display:block!important;font-size:12px!important;line-height:1.25!important;
+ overflow-wrap:normal!important;word-break:normal!important;
+}
+#content.homePageTiles.compactListing .shelfTypeLabel{
+ display:block!important;width:auto!important;border:0!important;background:transparent!important;
+ padding:0!important;border-radius:0!important;font-size:10px!important;line-height:1.2!important;
+}
+#content.homePageTiles.compactListing .shelfTileCounts{
+ display:block!important;width:auto!important;margin:0!important;padding:0!important;
+ border:0!important;background:transparent!important;font-size:10px!important;
+}
+#content.groupPageTiles.groupCompactTiles>.grid>.groupTile{
+ display:flex!important;flex-direction:row!important;align-items:center!important;
+ min-height:48px!important;height:auto!important;aspect-ratio:auto!important;
+ padding:9px!important;gap:7px!important;overflow:hidden!important;text-align:left!important;
+}
+#content.groupPageTiles.groupCompactTiles .groupTileEmoji{flex:0 0 auto!important;font-size:18px!important}
+#content.groupPageTiles.groupCompactTiles .groupTileText{
+ display:flex!important;flex:1 1 auto!important;min-width:0!important;
+ flex-direction:column!important;align-items:flex-start!important;gap:2px!important;
+}
+#content.groupPageTiles.groupCompactTiles .groupTileName{
+ font-size:12px!important;word-break:normal!important;overflow-wrap:normal!important;
+}
+#content.groupPageTiles.groupCompactTiles .groupTileCounts{
+ display:flex!important;flex:0 0 auto!important;flex-direction:row!important;
+ align-items:center!important;width:auto!important;margin:0 0 0 auto!important;
+ padding:0!important;border:0!important;gap:5px!important;
+}
+
+/* v0.3.8: scoped presentation changes; existing compact views remain untouched. */
+#content.homePageTiles:not(.compactListing) .shelfTilePreview .shelfTileIcon{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ font-size:52px!important;min-height:0!important;width:auto!important;
+}
+#content.homePageTiles:not(.compactListing) .shelfTileCornerIcon,
+#content.homePageTiles:not(.compactListing) .shelfTileStack{display:none!important}
+/* Active favorite control: the whole button, not only its heart, turns red. */
+.favoriteButton[aria-pressed="true"],
+#bulkFavorite.favoriteActive{
+ color:#ff5477!important;
+ background:color-mix(in srgb,#ff5477 13%,transparent)!important;
+ border:1px solid color-mix(in srgb,#ff5477 43%,transparent)!important;
+ border-radius:7px;
+ box-shadow:none!important;
+}
+.favoriteButton[aria-pressed="true"]:hover,
+#bulkFavorite.favoriteActive:hover{
+ background:color-mix(in srgb,#ff5477 22%,transparent)!important;
+}
+
+/* v0.3.9: user-selected group emoji in the preview corner.
+   Full-button favorite treatment, including Detailed Grid's high-specificity
+   image-overlay button and any previous important background overrides. */
+#content .favoriteButton[aria-pressed="true"],
+#content .entry .entryIndicators>.favoriteButton[aria-pressed="true"],
+#content .detailHeading>.favoriteButton[aria-pressed="true"],
+#content.detailedGridView .gridCardPhoto>.favoriteButton[aria-pressed="true"],
+#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton[aria-pressed="true"],
+#bulkFavorite.favoriteActive{
+  color:#ff5477!important;
+  background:color-mix(in srgb,#ff5477 14%,#252c35)!important;
+  border:1px solid #9c4056!important;
+  border-radius:7px!important;
+}
+#content .favoriteButton[aria-pressed="true"]:hover,
+#content.detailedGridView .gridCardPhoto .gridPhotoActions>.favoriteButton[aria-pressed="true"]:hover,
+#bulkFavorite.favoriteActive:hover{
+  background:color-mix(in srgb,#ff5477 23%,#252c35)!important;
+}
+
+/* v0.3.10: Collection-only preview preference; neutral numbered switch. */
+#itemPreviewSetting[hidden]{display:none!important}
+.collectionItemPreviewRow{margin-top:10px}
+.collectionItemPreviewRow small{display:block;margin-top:5px;color:var(--muted,#a9b3c3)}
+.numberedSwitch{background:var(--panel,#202a36)!important;border-color:var(--border,#405066)!important;color:var(--text,#e5edf5)!important}
+.numberedSwitch.on{background:var(--panel,#202a36)!important;border-color:var(--border,#405066)!important}
+.numberedSwitch span{display:flex;align-items:center;justify-content:center;font-family:inherit;font-weight:bold;color:inherit!important;background:var(--accent,#8099ba)!important;box-shadow:none!important}
+
+/* v0.4.0 Phase 2 — dedicated search results, independent of catalogue views */
+.unifiedSearch{display:flex;flex-direction:column;gap:8px;padding-bottom:20px}
+.searchSectionHeading{font:700 12px 'Courier New',monospace;letter-spacing:.06em;border-top:1px solid var(--border, #555);padding-top:17px;margin:18px 0 6px;text-align:center}
+.searchTypeLabel{font:700 11px 'Courier New',monospace;letter-spacing:.08em;opacity:.7;margin:12px 0 2px}
+.searchResult{width:100%;display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--border, #555);border-radius:10px;background:var(--panel, transparent);color:inherit;padding:10px;cursor:pointer;font-family:'Courier New',monospace;min-width:0}
+.searchResultBody{min-width:0;display:flex;flex-direction:column;gap:3px;overflow-wrap:anywhere}
+.searchResultBody strong{font-size:14px}.searchResultBody small{font-size:11px;opacity:.8}
+.searchResultImage,.searchResultSymbol{width:48px;height:54px;flex:none;object-fit:contain;border-radius:6px}
+.searchResultSymbol{display:flex;align-items:center;justify-content:center;font-size:25px;background:rgba(128,128,128,.10)}
+.searchMatch{background:transparent;color:#20c968;font-weight:900}
+.searchEmpty{opacity:.72;text-align:center;padding:20px 8px;font-size:12px}
+.searchResult:hover{border-color:#20c968}
+
+/* v0.4.0 Phase 3 — compact search filters */
+#searchFilterMenu{z-index:60;max-width:min(280px,calc(100vw - 24px));padding:8px}
+#searchFilterMenu button{display:block;width:100%;text-align:left;font:inherit;padding:8px 10px;border-radius:6px}
+#searchFilterMenu button[aria-pressed="true"]{color:var(--accent,#20c968);font-weight:bold}
+.searchFilterTitle{font-size:10px;font-weight:bold;opacity:.7;padding:6px 10px}
+.searchFilterDivider{border-top:1px solid var(--border,#555);margin:6px 0}
+
+.colorSchemeToggle{display:block;width:100%;margin-top:10px;text-align:center}.colorSchemePanel.hidden{display:none!important}
+
+/* Invalid date: conspicuous error state across all color schemes */
+.dateFields input.dateInvalid, :root:not([data-color-scheme="default"]) .dateFields input.dateInvalid{border-color:#ef4444!important;box-shadow:0 0 0 2px rgba(239,68,68,.35),0 0 9px rgba(239,68,68,.35)!important;outline:none}
+.editorInlineError{color:#ff7777;font-size:12px;font-weight:bold;margin-right:auto;align-self:center;max-width:65%;line-height:1.3}
