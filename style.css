@@ -1083,3 +1083,31 @@ button.caHistoryEntry{cursor:pointer}button.caHistoryEntry:hover{background:var(
 /* Keep dark green legible on dark backgrounds. */
 :root:not([data-theme="light"]) .whatsNewRelease .changeImproved{color:#4ade80}
 #status .notificationBracket,.settingsStatus .notificationBracket,.caHistoryBody .notificationBracket{font-weight:700}
+
+/* Linked Binder DEV: scoped indicators and reference picker. */
+.linkedMark{font-size:.82em;vertical-align:baseline;white-space:nowrap;opacity:.9}
+.linkedPickerList{max-height:52vh;overflow:auto;display:grid;gap:5px;margin:12px 0}
+.linkedPickerRow{display:flex;align-items:center;gap:10px;padding:9px;border:1px solid var(--edge);border-radius:8px;cursor:pointer}
+.linkedPickerRow input{width:auto;flex:none}.linkedPickerRow span{min-width:0;overflow-wrap:anywhere}
+
+/* v0.4.11 DEV: source-binder-first linked-card picker */
+.linkedPickerSource{display:block}.linkedPickerSource select{display:block;margin-top:6px}
+.linkedPickerContent{min-height:55px}.linkedPickerSummary{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:12px;margin:8px 0 2px}.linkedPickerSummary button{padding:5px 9px;font-size:12px}
+.linkedPickerList{max-height:48vh;overflow:auto;display:grid;gap:5px;margin:8px 0}
+.linkedPickerRow{display:flex;align-items:center;gap:10px;padding:9px;border:1px solid var(--edge);border-radius:8px;cursor:pointer;min-width:0}
+.linkedPickerRow input{width:auto;flex:none}.linkedPickerName{min-width:0;flex:1;overflow-wrap:anywhere}.linkedPickerName small{color:var(--muted)}
+.linkedPickerIndicators{display:flex;align-items:center;gap:5px;flex:none;flex-wrap:wrap;justify-content:flex-end;max-width:90px}.linkedPickerHeart{color:#ef777f;font-size:17px}
+
+/* v0.4.11 DEV: empty states span the full catalogue grid instead of one card column. */
+#content.cardBinderView > .empty,
+#content.detailedGridView > .empty {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+  white-space: normal;
+}
+
+/* Linked-card picker: compact, three-state sort control beside Select All. */
+.linkedPickerControls{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.linkedPickerControls #linkedSort{min-width:38px;font-weight:700;white-space:nowrap}
