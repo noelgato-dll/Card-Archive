@@ -1,6 +1,6 @@
 /* Card Archive offline application shell — no collection data is transmitted or cached here. */
-const CACHE_NAME = 'card-archive-shell-v0412-dev1';
-const APP_SHELL = ['./', './index.html', './style.css', './script.js', './manifest.webmanifest', './icon.svg'];
+const CACHE_NAME = 'card-archive-shell-v0412-dev3';
+const APP_SHELL = ['./', './index.html', './style.css', './script.js', './manifest.webmanifest', './icon.svg', './apple-touch-icon.png', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
 });
@@ -20,7 +20,7 @@ self.addEventListener('fetch', event => {
     }));
     return;
   }
-  const shellNames = new Set(['style.css','script.js','manifest.webmanifest','icon.svg']);
+  const shellNames = new Set(['style.css','script.js','manifest.webmanifest','icon.svg','apple-touch-icon.png','icon-192.png','icon-512.png']);
   const name = url.pathname.split('/').pop();
   if (!shellNames.has(name)) return;
   event.respondWith(caches.open(CACHE_NAME).then(async cache => {

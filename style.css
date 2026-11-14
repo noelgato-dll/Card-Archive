@@ -1111,3 +1111,13 @@ button.caHistoryEntry{cursor:pointer}button.caHistoryEntry:hover{background:var(
 /* Linked-card picker: compact, three-state sort control beside Select All. */
 .linkedPickerControls{display:flex;align-items:center;gap:6px;flex-shrink:0}
 .linkedPickerControls #linkedSort{min-width:38px;font-weight:700;white-space:nowrap}
+
+/* v0.4.12 DEV: swatch-only scheme choices; retain accessible button names. */
+.colorSchemeOption{padding:6px;gap:0;min-height:46px;justify-content:center}
+.colorSchemeSwatch{height:34px}
+/* Keep the version line clear of the translucent iOS Home Screen status bar. */
+@supports (padding-top: env(safe-area-inset-top)) {
+  @media (display-mode: standalone) {
+    .shell{padding-top:calc(env(safe-area-inset-top, 0px) + 32px)}
+  }
+}
