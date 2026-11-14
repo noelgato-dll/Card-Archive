@@ -1,5 +1,5 @@
 /* Card Archive: network-first navigation with offline application-shell fallback. */
-const CACHE_NAME = 'card-archive-shell-v0412-network-dev1';
+const CACHE_NAME = 'card-archive-shell-v0412-stable1';
 const APP_SHELL = ['./', './index.html', './style.css', './script.js', './manifest.webmanifest', './icon.svg', './apple-touch-icon.png', './icon-192.png', './icon-512.png'];
 const SHELL_FILES = new Set(['index.html','style.css','script.js','manifest.webmanifest','icon.svg','apple-touch-icon.png','icon-192.png','icon-512.png']);
 const scopeURL = new URL(self.registration.scope);
