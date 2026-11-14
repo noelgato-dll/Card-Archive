@@ -1121,3 +1121,6 @@ button.caHistoryEntry{cursor:pointer}button.caHistoryEntry:hover{background:var(
     .shell{padding-top:calc(env(safe-area-inset-top, 0px) + 32px)}
   }
 }
+
+/* Prevent accidental double-tap page zoom on iOS while retaining pinch zoom, scrolling and viewer gestures. */
+html,body,.shell,.modalShade,.modal,button,input,select,textarea,a{touch-action:manipulation;}
