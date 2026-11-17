@@ -1124,3 +1124,16 @@ button.caHistoryEntry{cursor:pointer}button.caHistoryEntry:hover{background:var(
 
 /* Prevent accidental double-tap page zoom on iOS while retaining pinch zoom, scrolling and viewer gestures. */
 html,body,.shell,.modalShade,.modal,button,input,select,textarea,a{touch-action:manipulation;}
+
+/* v0.4.13: separate gesture and toolbar paint layers on iOS Safari. */
+.viewer{isolation:isolate;overflow:hidden;height:100dvh;min-height:0}
+.viewer .top{position:relative;z-index:10;flex:0 0 auto;padding-top:calc(12px + env(safe-area-inset-top,0px));padding-left:calc(12px + env(safe-area-inset-left,0px));padding-right:calc(12px + env(safe-area-inset-right,0px));background:#080a0d;isolation:isolate;transform:translateZ(0)}
+.viewer .stage{position:relative;z-index:0;min-height:0;min-width:0;overflow:hidden;overscroll-behavior:contain;contain:layout paint;isolation:isolate;background:#080a0d}
+.viewer .stage img{display:block;flex:0 0 auto;backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:transform}
+
+/* Image 3: clear-search control inside existing toolbar footprint. */
+.toolbar .searchField{position:relative;flex:1 1 auto;min-width:0;display:flex;align-items:center}
+.toolbar .searchField #search{width:100%;min-width:0;flex:1 1 auto;padding-right:38px}
+.toolbar .searchField #searchClear{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:30px;height:30px;padding:0;display:grid;place-items:center;background:transparent;border:0;color:var(--muted);font-size:18px;z-index:1}
+/* Crop action row: remove sticky opaque rectangular footer, preserve buttons. */
+.cropShade .modal .actions{position:static;background:transparent!important;padding:0!important;margin-top:10px;z-index:auto}
