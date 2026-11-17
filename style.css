@@ -1137,3 +1137,12 @@ html,body,.shell,.modalShade,.modal,button,input,select,textarea,a{touch-action:
 .toolbar .searchField #searchClear{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:30px;height:30px;padding:0;display:grid;place-items:center;background:transparent;border:0;color:var(--muted);font-size:18px;z-index:1}
 /* Crop action row: remove sticky opaque rectangular footer, preserve buttons. */
 .cropShade .modal .actions{position:static;background:transparent!important;padding:0!important;margin-top:10px;z-index:auto}
+
+/* v0.4.13 maintenance: seven-entry, single-open release accordion. */
+.whatsNewReleaseHeader{width:100%;padding:2px 0;background:transparent;border:0;border-radius:0;color:var(--text);font:inherit;text-align:left;cursor:pointer;align-items:flex-start}
+.whatsNewReleaseHeader strong{flex:1;min-width:0;overflow-wrap:anywhere}
+.whatsNewReleaseHeader time{flex:none}
+.whatsNewReleaseHeader:hover strong{text-decoration:underline}
+.whatsNewReleaseHeader:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.whatsNewReleaseHeader[aria-expanded="true"] strong{color:var(--accent)}
+.whatsNewRelease ul.hidden{display:none}
