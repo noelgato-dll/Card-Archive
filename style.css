@@ -1261,3 +1261,13 @@ html,body,.shell,.modalShade,.modal,button,input,select,textarea,a{touch-action:
 #binderList .binderManageLabel{flex:1 1 auto;min-width:0;max-width:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;overflow-wrap:normal;word-break:normal}
 #binderList .listRow button{flex:0 0 auto;min-width:28px;padding:5px 7px}
 @media(max-width:420px){#binderList .listRow{gap:4px}#binderList .listRow button{padding:5px 5px}}
+
+/* v0.4.14 hotfix: price inputs share a two-column row in card and copy editors. */
+.priceFieldsRow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+.priceFieldsRow>.moneyEditor{display:block;min-width:0}
+.priceFieldsRow>.moneyEditor>.field{display:block;min-width:0;width:100%}
+.priceFieldsRow>.moneyEditor input{width:100%;min-width:0;box-sizing:border-box}
+.priceFieldsRow>.moneyEditor .help{display:block;overflow-wrap:anywhere}
+
+/* v0.4.14: one currency preservation note below the paired price fields. */
+.priceCurrencyNote{margin:2px 0 10px;line-height:1.4}
