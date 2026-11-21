@@ -1285,3 +1285,25 @@ html,body,.shell,.modalShade,.modal,button,input,select,textarea,a{touch-action:
 /* v0.4.15 activation dialog refinement. */
 .caActivationAuthor{display:block;margin-top:5px;letter-spacing:normal;font-size:12px;opacity:.75}
 .caActivationDialog #caActivationForm>input{margin-top:22px}
+
+/* v0.4.16 DEV: explicit activation Confirm button border, consistent with CA controls. */
+.caActivationDialog #caActivationForm > button[type="submit"] {
+  display:block;
+  box-sizing:border-box;
+  width:100%;
+  min-height:44px;
+  margin-top:14px;
+  padding:12px 16px;
+  border:1px solid #718091;
+  border-radius:8px;
+  background:#dce7f1;
+  color:#18202b;
+  font:700 14px 'Courier New',Courier,monospace;
+  text-align:center;
+  cursor:pointer;
+  appearance:none;
+}
+.caActivationDialog #caActivationForm > button[type="submit"]:focus-visible {
+  outline:2px solid #e8eef7;
+  outline-offset:2px;
+}

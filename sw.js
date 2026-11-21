@@ -1,7 +1,7 @@
 /* Card Archive: network-first navigation with offline application-shell fallback. */
-const CACHE_NAME = 'card-archive-shell-v0415-stable-dialog-refinement';
-const APP_SHELL = ['./', './index.html', './style.css', './script.js', './activation.js', './manifest.webmanifest', './icon.svg', './apple-touch-icon.png', './icon-192.png', './icon-512.png'];
-const SHELL_FILES = new Set(['index.html','style.css','script.js','activation.js','manifest.webmanifest','icon.svg','apple-touch-icon.png','icon-192.png','icon-512.png']);
+const CACHE_NAME = 'card-archive-shell-v0416-stable-encrypted';
+const APP_SHELL = ['./', './index.html', './style.css', './script.enc.json', './activation.js', './manifest.webmanifest', './icon.svg', './apple-touch-icon.png', './icon-192.png', './icon-512.png'];
+const SHELL_FILES = new Set(['index.html','style.css','script.enc.json','activation.js','manifest.webmanifest','icon.svg','apple-touch-icon.png','icon-192.png','icon-512.png']);
 const scopeURL = new URL(self.registration.scope);
 function inScope(url) { return url.origin === scopeURL.origin && url.pathname.startsWith(scopeURL.pathname); }
 async function cachedFallback(cache, request, filename) {
@@ -26,6 +26,10 @@ self.addEventListener('fetch', event => {
         if (response.ok && response.type === 'basic') {
           await cache.put(new URL('index.html', scopeURL).toString(), response.clone()).catch(() => {});
         }
+        if (!response.ok) {
+          const fallback = await cachedFallback(cache, request, 'index.html');
+          return fallback || response;
+        }
         return response;
       } catch (error) {
         const fallback = await cachedFallback(cache, request, 'index.html');
@@ -41,6 +45,7 @@ self.addEventListener('fetch', event => {
     try {
       const response = await fetch(request);
       if (response.ok && response.type === 'basic') await cache.put(new URL(filename, scopeURL).toString(), response.clone()).catch(() => {});
+      if (!response.ok) return (await cachedFallback(cache, request, filename)) || response;
       return response;
     } catch (error) {
       return (await cachedFallback(cache, request, filename)) || Response.error();
