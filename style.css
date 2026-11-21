@@ -1271,3 +1271,8 @@ html,body,.shell,.modalShade,.modal,button,input,select,textarea,a{touch-action:
 
 /* v0.4.14: one currency preservation note below the paired price fields. */
 .priceCurrencyNote{margin:2px 0 10px;line-height:1.4}
+
+/* v0.4.14 tracker readability hotfix: emphasize amounts, not labels. */
+.homeValueStat{gap:0.45em;flex-wrap:wrap;align-content:center}
+.homeValueStat .valueTrackerLabel{font-weight:normal}
+.homeValueStat .valueTrackerAmount{font-size:calc(1em + 1pt);font-weight:700;white-space:nowrap}
