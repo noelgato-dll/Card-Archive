@@ -1,7 +1,7 @@
 /* Card Archive: network-first navigation with offline application-shell fallback. */
-const CACHE_NAME = 'card-archive-shell-v0414-stable-value-emphasis-hotfix';
-const APP_SHELL = ['./', './index.html', './style.css', './script.js', './manifest.webmanifest', './icon.svg', './apple-touch-icon.png', './icon-192.png', './icon-512.png'];
-const SHELL_FILES = new Set(['index.html','style.css','script.js','manifest.webmanifest','icon.svg','apple-touch-icon.png','icon-192.png','icon-512.png']);
+const CACHE_NAME = 'card-archive-shell-v0415-stable-dialog-refinement';
+const APP_SHELL = ['./', './index.html', './style.css', './script.js', './activation.js', './manifest.webmanifest', './icon.svg', './apple-touch-icon.png', './icon-192.png', './icon-512.png'];
+const SHELL_FILES = new Set(['index.html','style.css','script.js','activation.js','manifest.webmanifest','icon.svg','apple-touch-icon.png','icon-192.png','icon-512.png']);
 const scopeURL = new URL(self.registration.scope);
 function inScope(url) { return url.origin === scopeURL.origin && url.pathname.startsWith(scopeURL.pathname); }
 async function cachedFallback(cache, request, filename) {

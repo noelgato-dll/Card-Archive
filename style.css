@@ -1276,3 +1276,12 @@ html,body,.shell,.modalShade,.modal,button,input,select,textarea,a{touch-action:
 .homeValueStat{gap:0.45em;flex-wrap:wrap;align-content:center}
 .homeValueStat .valueTrackerLabel{font-weight:normal}
 .homeValueStat .valueTrackerAmount{font-size:calc(1em + 1pt);font-weight:700;white-space:nowrap}
+
+/* Stable release activation gate; blocks interaction with the underlying app. */
+.caActivationRoot:not(:empty){position:fixed;inset:0;z-index:2147483647;background:#11161df5;display:flex;align-items:center;justify-content:center;padding:20px;overscroll-behavior:contain}
+.caActivationDialog{width:min(100%,410px);box-sizing:border-box;border:1px solid #44505d;border-radius:14px;background:#202831;color:#f2f5f7;padding:24px;box-shadow:0 20px 80px #0009;font-family:inherit}
+.caActivationBrand{font-size:12px;letter-spacing:.09em;opacity:.8}.caActivationDialog h2{margin:18px 0 8px;font-size:21px}.caActivationDialog p{font-size:13px;line-height:1.5}.caActivationDialog label{display:block;margin:20px 0 8px;font-size:13px}.caActivationDialog input{display:block;box-sizing:border-box;width:100%;padding:12px;border:1px solid #718091;border-radius:8px;background:#111820;color:#fff;font:inherit}.caActivationDialog button{margin-top:14px;width:100%;padding:12px;border-radius:8px;border:0;background:#dce7f1;color:#18202b;font-weight:bold;cursor:pointer}.caActivationDialog button:disabled{opacity:.6}#caActivationError{min-height:1.2em;color:#ff9e9e}
+
+/* v0.4.15 activation dialog refinement. */
+.caActivationAuthor{display:block;margin-top:5px;letter-spacing:normal;font-size:12px;opacity:.75}
+.caActivationDialog #caActivationForm>input{margin-top:22px}
