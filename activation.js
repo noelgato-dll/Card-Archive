@@ -1,4 +1,4 @@
-/* Card Archive encrypted release activation — v0.4.18 DEV.
+/* Card Archive encrypted release activation — v0.4.18.
  *
  * Replaces the earlier flag-based lock. There is no "unlocked" boolean
  * anywhere in this file or in storage. The password is used to derive an
@@ -16,9 +16,9 @@
  */
 'use strict';
 
-const CA_LOCK_RELEASE = '0.4.18-dev-search-1';
+const CA_LOCK_RELEASE = '0.4.18';
 const CA_UNLOCK_SESSION_KEY = 'card-archive-permanent-key-v2-' + CA_LOCK_RELEASE; // IndexedDB-held key handle, NOT a boolean
-const CA_ENC_MANIFEST_URL = 'script.enc.json?v=0418-dev-search-1';
+const CA_ENC_MANIFEST_URL = 'script.enc.json?v=0418-stable';
 
 function caFail(root, message) {
   const err = document.getElementById('caActivationError');
@@ -131,7 +131,7 @@ async function caTryStoredKey(manifest) {
 function caLockScreen(manifest) {
   const root = document.getElementById('caActivationRoot');
   if (!root) return;
-  root.innerHTML = `<div class="caActivationDialog" role="dialog" aria-modal="true" aria-labelledby="caActivationHeading"><div class="caActivationBrand">CARD ARCHIVE / V0.4.18 DEV · SEARCH 1<span class="caActivationAuthor">noelgato-dll</span></div><h2 id="caActivationHeading">Activation Required</h2><p>Enter the password for this release.</p><form id="caActivationForm"><input aria-label="Release password" id="caActivationPassword" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" required maxlength="64" /><p id="caActivationError" role="alert" aria-live="polite"></p><button type="submit">Confirm</button></form></div>`;
+  root.innerHTML = `<div class="caActivationDialog" role="dialog" aria-modal="true" aria-labelledby="caActivationHeading"><div class="caActivationBrand">CARD ARCHIVE / V0.4.18<span class="caActivationAuthor">noelgato-dll</span></div><h2 id="caActivationHeading">Activation Required</h2><p>Enter the password for this release.</p><form id="caActivationForm"><input aria-label="Release password" id="caActivationPassword" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" required maxlength="64" /><p id="caActivationError" role="alert" aria-live="polite"></p><button type="submit">Confirm</button></form></div>`;
   const input = document.getElementById('caActivationPassword');
   input.focus();
   document.getElementById('caActivationForm').onsubmit = async e => {
